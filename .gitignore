@@ -1,0 +1,11 @@
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Scratch & Logs
+*.log
+scratch/
+.system_generated/

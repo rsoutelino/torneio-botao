@@ -1,0 +1,17 @@
+{
+  "name": "Copa Meinha de Bot\u00e3o",
+  "short_name": "Copa Meinha",
+  "description": "Gerenciador Oficial da Copa Meinha de Futebol de Bot\u00e3o - Sistema Operacional Terra",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#faf6f0",
+  "theme_color": "#4a7c59",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

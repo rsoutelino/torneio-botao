@@ -1,0 +1,138 @@
+/* Terra — Organic Design System Stylesheet */
+:root {
+  --primary: #4a7c59;
+  --primary-dark: #3b6548;
+  --primary-light: #8ecf9e;
+  --primary-fixed: #c8e8d0;
+  --on-primary: #ffffff;
+  --background: #faf6f0;
+  --surface: #faf6f0;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f5f1ea;
+  --surface-container: #f0ece4;
+  --surface-container-high: #eae6de;
+  --surface-container-highest: #e4e0d8;
+  --on-surface: #2e3230;
+  --on-surface-variant: #4a4e4a;
+  --tertiary: #705c30;
+  --tertiary-fixed: #f8e0a8;
+  --outline: #74796e;
+  --outline-variant: #c4c8bc;
+  --error: #b83230;
+  --shadow-soft: 0 4px 20px rgba(46, 50, 48, 0.06);
+  --shadow-glow: 0 12px 32px -8px rgba(74, 124, 89, 0.18), 0 4px 12px rgba(112, 92, 48, 0.08);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6, .font-headline {
+  font-family: 'Literata', Georgia, serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Custom Scrollbar */
+.custom-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: var(--surface-container);
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 9999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
+}
+
+/* Modal Dialogs */
+dialog {
+  border: none;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 25px 50px -12px rgba(46, 50, 48, 0.25);
+  max-width: 90vw;
+  width: 580px;
+  padding: 0;
+  color: var(--on-surface);
+}
+
+dialog::backdrop {
+  background: rgba(46, 50, 48, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+dialog[open] {
+  animation: modal-in 0.25s ease-out forwards;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Floating Match Timer Widget */
+#floating-timer-widget {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+#floating-timer-widget.minimized {
+  transform: translateY(calc(100% - 48px));
+}
+
+/* Confetti Canvas */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Print Stylesheet for Tournament Certificate / Standings */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, nav, #btn-simulate, #btn-reset, #floating-timer-widget, .no-print {
+    display: none !important;
+  }
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .shadow-sm, .shadow-md, .shadow-xl {
+    box-shadow: none !important;
+  }
+  .border, .border-2 {
+    border-color: #cccccc !important;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+}

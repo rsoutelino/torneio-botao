@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Copa Meinha de Bot&atilde;o</title>
+  
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="icon" type="image/svg+xml" href="icon.svg"/>
+
+  <!-- Fontes Google: Literata, Nunito Sans, JetBrains Mono, Material Symbols -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-highest": "#e4e0d8",
+            "tertiary-fixed": "#f8e0a8",
+            "primary": "#4a7c59",
+            "outline-variant": "#c4c8bc",
+            "on-surface-variant": "#4a4e4a",
+            "surface-tint": "#4a7c59",
+            "surface-container-high": "#eae6de",
+            "inverse-primary": "#8ecf9e",
+            "secondary-fixed-dim": "#d4ccbf",
+            "primary-fixed-dim": "#8ecf9e",
+            "on-secondary-container": "#5e5548",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#d8f0de",
+            "surface-dim": "#dbd7cf",
+            "surface": "#faf6f0",
+            "tertiary-fixed-dim": "#dcc48e",
+            "on-surface": "#2e3230",
+            "on-tertiary-fixed-variant": "#554020",
+            "on-secondary-fixed-variant": "#4a4538",
+            "on-tertiary": "#ffffff",
+            "secondary": "#6b6358",
+            "surface-variant": "#e4e0d8",
+            "secondary-container": "#f0e8db",
+            "background": "#faf6f0",
+            "inverse-surface": "#2e3230",
+            "on-primary-fixed-variant": "#2a6038",
+            "error-container": "#ffdad8",
+            "on-error": "#ffffff",
+            "tertiary-container": "#c4a66a",
+            "surface-container-low": "#f5f1ea",
+            "on-secondary-fixed": "#1e1a13",
+            "surface-container": "#f0ece4",
+            "outline": "#74796e",
+            "on-background": "#2e3230",
+            "on-tertiary-container": "#554020",
+            "tertiary": "#705c30",
+            "on-tertiary-fixed": "#221a05",
+            "on-primary": "#ffffff",
+            "primary-fixed": "#c8e8d0",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#faf6f0",
+            "error": "#b83230",
+            "primary-container": "#78a886",
+            "secondary-fixed": "#f0e8db",
+            "inverse-on-surface": "#f5f0e8",
+            "on-error-container": "#690005",
+            "on-primary-fixed": "#002110"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.5rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Literata", "serif"],
+            "display": ["Literata", "serif"],
+            "body": ["Nunito Sans", "sans-serif"],
+            "label": ["Nunito Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+
+  <!-- Folha de Estilos Terra Organic Design -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-primary/20 selection:text-primary min-h-screen relative overflow-x-hidden">
+
+  <!-- Brilhos Organicos Atmosfericos -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute -top-32 left-1/4 w-[650px] h-[450px] bg-primary/10 rounded-full blur-[130px]"></div>
+    <div class="absolute top-1/3 right-[-5%] w-[550px] h-[550px] bg-tertiary-fixed/40 rounded-full blur-[140px]"></div>
+    <div class="absolute bottom-[-80px] left-8 w-[450px] h-[400px] bg-primary-fixed/50 rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    
+    <!-- Barra Superior de Navegacao -->
+    <header class="w-full px-4 md:px-10 flex justify-between items-center border-b border-outline-variant/60 sticky top-0 z-50 backdrop-blur-md bg-surface-container-lowest/85 shadow-sm">
+      <div class="flex items-center gap-3 md:gap-4 py-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-surface-container border border-outline-variant/70 flex items-center justify-center text-primary shadow-sm flex-shrink-0 cursor-pointer" onclick="openSettingsModal()" title="Configura&ccedil;&otilde;es do Torneio">
+          <img src="icon.svg" alt="Copa Meinha de Bot&atilde;o" class="w-7 h-7"/>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <h1 class="font-headline font-bold text-[18px] md:text-[19px] text-primary tracking-tight cursor-pointer" id="app-title" onclick="openSettingsModal()">Copa Meinha de Bot&atilde;o</h1>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-label font-bold bg-primary-fixed text-on-primary-fixed-variant border border-primary/30 inline-flex items-center gap-1.5" id="app-badge">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              COPA MEINHA
+            </span>
+          </div>
+          <p class="text-xs font-body text-on-surface-variant font-medium hidden sm:block" id="app-subtitle">Torneio Oficial de Futebol de Bot&atilde;o &bull; Regras 12 Toques &amp; Dadinho</p>
+        </div>
+      </div>
+
+      <!-- Links de Navegacao -->
+      <nav class="hidden xl:flex items-center gap-7">
+        <a class="text-primary font-bold text-sm py-4 border-b-2 border-primary tracking-wide" href="#overview-section">Vis&atilde;o Geral</a>
+        <a class="text-on-surface-variant font-semibold text-sm py-4 hover:text-primary transition-colors tracking-wide" href="#group-section">Grupos A &amp; B</a>
+        <a class="text-on-surface-variant font-semibold text-sm py-4 hover:text-primary transition-colors tracking-wide" href="#bracket-section">Mata-Mata &amp; Finais</a>
+        <a class="text-on-surface-variant font-semibold text-sm py-4 hover:text-primary transition-colors tracking-wide" href="#stats-section">Estat&iacute;sticas</a>
+      </nav>
+
+      <!-- Botoes de Acao e Controles -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        <button class="px-3 md:px-4 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs md:text-sm hover:bg-[#3b6548] active:scale-95 transition-all flex items-center gap-1.5 shadow-sm" id="btn-simulate" onclick="simulateAllMatches()" title="Simular placares para todas as fases">
+          <span class="material-symbols-outlined text-[18px]">sports_score</span>
+          <span class="hidden sm:inline">Simular Placares</span>
+        </button>
+
+        <button class="px-2.5 sm:px-3.5 py-2 rounded-xl bg-surface-container border border-outline-variant/80 text-on-surface hover:bg-surface-container-high active:scale-95 transition-all text-xs font-bold flex items-center gap-1.5" id="btn-reset" onclick="resetTournament()" title="Zerar todos os placares do torneio">
+          <span class="material-symbols-outlined text-[18px]">refresh</span>
+          <span class="hidden md:inline">Zerar Torneio</span>
+        </button>
+
+        <div class="h-6 w-px bg-outline-variant/60 mx-1 hidden sm:block"></div>
+
+        <!-- Botao Ir para Mata-Mata -->
+        <button class="p-2 rounded-xl bg-surface-container-low hover:bg-surface-container text-tertiary border border-outline-variant/60 active:scale-95 transition-transform" onclick="scrollSection('bracket-section')" title="Ver Chave do Mata-Mata">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trophy</span>
+        </button>
+
+        <!-- Gerenciador de Times -->
+        <button class="p-2 rounded-xl bg-surface-container-low hover:bg-surface-container text-primary border border-outline-variant/60 active:scale-95 transition-transform" onclick="openTeamManagerModal()" title="Gerenciar &amp; Editar Times">
+          <span class="material-symbols-outlined">shield</span>
+        </button>
+
+        <!-- Configuracoes do Torneio -->
+        <button class="p-2 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant border border-outline-variant/60 active:scale-95 transition-transform" onclick="openSettingsModal()" title="Configura&ccedil;&otilde;es &amp; Backup">
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+
+        <!-- Imprimir Sumula -->
+        <button class="p-2 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface-variant border border-outline-variant/60 active:scale-95 transition-transform hidden sm:flex" onclick="printTournament()" title="Imprimir S&uacute;mula do Torneio">
+          <span class="material-symbols-outlined">print</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Conteudo Principal do Torneio -->
+    <main class="flex-1 w-full max-w-[1600px] mx-auto px-4 md:px-8 py-7 space-y-8">
+      
+      <!-- Faixa de Telemetria e Indicadores Rapidos -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-4" id="overview-section">
+        <!-- Progresso do Torneio -->
+        <div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block">Progresso do Torneio</span>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-2xl font-headline font-bold text-on-surface" id="stat-progress-text">12/16</span>
+              <span class="text-xs font-bold text-primary">Jogos Conclu&iacute;dos</span>
+            </div>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">analytics</span>
+          </div>
+        </div>
+
+        <!-- Total de Gols Marcados -->
+        <div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block">Total de Gols</span>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-2xl font-headline font-bold text-tertiary" id="stat-total-goals">38</span>
+              <span class="text-xs font-medium text-on-surface-variant" id="stat-avg-goals">2.37 M&eacute;dia / Jogo</span>
+            </div>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-tertiary-fixed/60 border border-tertiary/30 flex items-center justify-center text-tertiary">
+            <span class="material-symbols-outlined">scoreboard</span>
+          </div>
+        </div>
+
+        <!-- Lider Geral / 1o Lugar -->
+        <div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block">L&iacute;der Geral / 1&ordm;</span>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-2xl font-headline font-bold text-primary truncate max-w-[140px]" id="stat-top-candidate">Flamengo</span>
+            </div>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined">military_tech</span>
+          </div>
+        </div>
+
+        <!-- Estadio da Final & Trofeu -->
+        <div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 shadow-sm flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block">Est&aacute;dio da Final &amp; Trof&eacute;u</span>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-2xl font-headline font-bold text-secondary truncate max-w-[140px]" id="stat-venue">Est&aacute;dio Maracan&atilde; de Mesa</span>
+            </div>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-secondary-container border border-secondary/20 flex items-center justify-center text-secondary">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trophy</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Barra de Filtros e Ferramentas Rapidas -->
+      <section class="flex flex-wrap items-center justify-between gap-4 border-b border-outline-variant/50 pb-4">
+        <div class="inline-flex rounded-2xl bg-surface-container p-1 border border-outline-variant/60 shadow-sm overflow-x-auto max-w-full">
+          <button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs shadow-sm flex-shrink-0">Painel Geral do Torneio</button>
+          <a class="px-4 py-2 rounded-xl text-on-surface-variant hover:text-on-surface font-semibold text-xs transition-all flex-shrink-0" href="#group-section">Tabelas e Jogos dos Grupos</a>
+          <a class="px-4 py-2 rounded-xl text-on-surface-variant hover:text-on-surface font-semibold text-xs transition-all flex-shrink-0" href="#bracket-section">Chave do Mata-Mata</a>
+          <a class="px-4 py-2 rounded-xl text-on-surface-variant hover:text-on-surface font-semibold text-xs transition-all flex-shrink-0" href="#stats-section">Artilharia &amp; Dados</a>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button class="px-3.5 py-2 rounded-xl bg-surface-container border border-outline-variant/70 hover:bg-surface-container-high text-on-surface text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-all shadow-sm" onclick="randomizeCurrentScores()">
+            <span class="material-symbols-outlined text-[16px]">shuffle</span>
+            Sortear Rodada
+          </button>
+          <span class="text-xs font-medium text-on-surface-variant px-3 py-1.5 bg-surface-container-lowest rounded-xl border border-outline-variant/60 flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+            Sincroniza&ccedil;&atilde;o em Tempo Real
+          </span>
+        </div>
+      </section>
+
+      <!-- SECAO: FASE DE GRUPOS (GRUPOS A E B) -->
+      <section class="space-y-6" id="group-section">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-primary"></span>
+              <h2 class="text-2xl md:text-3xl font-headline font-bold text-on-surface">Fase de Grupos</h2>
+            </div>
+            <p class="text-sm font-body text-on-surface-variant mt-0.5">Os 2 primeiros colocados de cada grupo avan&ccedil;am direto para as Semifinais. Ajuste os placares para atualizar a tabela em tempo real.</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-surface-container border border-outline-variant/70 text-on-surface-variant self-start sm:self-auto">
+            Rodadas 1, 2 e 3 &bull; 12 Partidas no Total
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          
+          <!-- COLUNA DO GRUPO A -->
+          <div class="space-y-5 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/70 shadow-sm">
+            <div class="flex items-center justify-between border-b border-outline-variant/50 pb-3">
+              <div class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-primary-fixed text-on-primary-fixed-variant border border-primary/30 flex items-center justify-center font-bold font-headline text-lg">A</span>
+                <div>
+                  <h3 class="text-xl font-headline font-bold text-on-surface">Classifica&ccedil;&atilde;o do Grupo A</h3>
+                  <span class="text-xs font-body text-on-surface-variant">4 Times &bull; 6 Partidas</span>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-primary flex items-center gap-1 bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span> Top 2 Classificam
+              </span>
+            </div>
+
+            <!-- Tabela de Classificacao do Grupo A -->
+            <div class="overflow-x-auto rounded-xl border border-outline-variant/60 bg-surface-container-low/60">
+              <table class="w-full text-left border-collapse font-body">
+                <thead>
+                  <tr class="bg-surface-container/80 text-xs font-bold text-on-surface-variant border-b border-outline-variant/60">
+                    <th class="py-2.5 px-3 text-center w-10">POS</th>
+                    <th class="py-2.5 px-3">CLUBE</th>
+                    <th class="py-2.5 px-2 text-center" title="Jogos Disputados">J</th>
+                    <th class="py-2.5 px-2 text-center" title="Vit&oacute;rias">V</th>
+                    <th class="py-2.5 px-2 text-center" title="Empates">E</th>
+                    <th class="py-2.5 px-2 text-center" title="Derrotas">D</th>
+                    <th class="py-2.5 px-2 text-center" title="Gols Pr&oacute;">GP</th>
+                    <th class="py-2.5 px-2 text-center" title="Gols Contra">GC</th>
+                    <th class="py-2.5 px-2 text-center" title="Saldo de Gols">SG</th>
+                    <th class="py-2.5 px-3 text-center text-primary font-bold" title="Pontos Ganhos">PTS</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/30 text-xs font-medium" id="table-group-a">
+                  <!-- Renderizado dinamicamente via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Jogos do Grupo A -->
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Jogos do Grupo A</span>
+                <span class="text-xs font-bold text-primary">Ajuste de Placar (Clique para s&uacute;mula)</span>
+              </div>
+              <div class="space-y-3" id="fixtures-group-a">
+                <!-- Injetado via JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUNA DO GRUPO B -->
+          <div class="space-y-5 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/70 shadow-sm">
+            <div class="flex items-center justify-between border-b border-outline-variant/50 pb-3">
+              <div class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary/30 flex items-center justify-center font-bold font-headline text-lg">B</span>
+                <div>
+                  <h3 class="text-xl font-headline font-bold text-on-surface">Classifica&ccedil;&atilde;o do Grupo B</h3>
+                  <span class="text-xs font-body text-on-surface-variant">4 Times &bull; 6 Partidas</span>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-primary flex items-center gap-1 bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span> Top 2 Classificam
+              </span>
+            </div>
+
+            <!-- Tabela de Classificacao do Grupo B -->
+            <div class="overflow-x-auto rounded-xl border border-outline-variant/60 bg-surface-container-low/60">
+              <table class="w-full text-left border-collapse font-body">
+                <thead>
+                  <tr class="bg-surface-container/80 text-xs font-bold text-on-surface-variant border-b border-outline-variant/60">
+                    <th class="py-2.5 px-3 text-center w-10">POS</th>
+                    <th class="py-2.5 px-3">CLUBE</th>
+                    <th class="py-2.5 px-2 text-center" title="Jogos Disputados">J</th>
+                    <th class="py-2.5 px-2 text-center" title="Vit&oacute;rias">V</th>
+                    <th class="py-2.5 px-2 text-center" title="Empates">E</th>
+                    <th class="py-2.5 px-2 text-center" title="Derrotas">D</th>
+                    <th class="py-2.5 px-2 text-center" title="Gols Pr&oacute;">GP</th>
+                    <th class="py-2.5 px-2 text-center" title="Gols Contra">GC</th>
+                    <th class="py-2.5 px-2 text-center" title="Saldo de Gols">SG</th>
+                    <th class="py-2.5 px-3 text-center text-primary font-bold" title="Pontos Ganhos">PTS</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/30 text-xs font-medium" id="table-group-b">
+                  <!-- Renderizado dinamicamente via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Jogos do Grupo B -->
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Jogos do Grupo B</span>
+                <span class="text-xs font-bold text-primary">Ajuste de Placar (Clique para s&uacute;mula)</span>
+              </div>
+              <div class="space-y-3" id="fixtures-group-b">
+                <!-- Injetado via JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER COMEMORATIVO DO CAMPEAO -->
+      <section class="hidden p-6 md:p-8 rounded-3xl bg-gradient-to-r from-surface-container-low via-surface-container to-secondary-container/40 border-2 border-tertiary/40 relative overflow-hidden transition-all duration-500 shadow-md" id="champion-banner">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-tertiary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+          <div class="flex items-center gap-5">
+            <div class="w-20 h-20 rounded-2xl bg-tertiary-fixed border-2 border-tertiary flex items-center justify-center text-tertiary shadow-md flex-shrink-0">
+              <span class="material-symbols-outlined text-[46px]" style="font-variation-settings: 'FILL' 1;">trophy</span>
+            </div>
+            <div>
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-tertiary text-on-tertiary uppercase tracking-wider">
+                Campe&atilde;o da Copa Meinha de Bot&atilde;o
+              </span>
+              <h2 class="text-3xl md:text-4xl font-headline font-bold text-on-surface mt-1.5" id="champion-team-name">Flamengo</h2>
+              <p class="text-sm font-body text-on-surface-variant" id="champion-subtext">Grande campe&atilde;o do torneio em uma final hist&oacute;rica de futebol de bot&atilde;o!</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <button class="px-5 py-3 rounded-2xl bg-tertiary text-on-tertiary font-bold text-sm hover:brightness-105 active:scale-95 transition-all flex items-center gap-2 shadow-sm" onclick="triggerConfettiBanner()">
+              <span class="material-symbols-outlined">celebration</span>
+              Tocar Hino &amp; Chuva de Confetes
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECAO: MATA-MATA E FASE DECISIVA -->
+      <section class="space-y-6 pt-2" id="bracket-section">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-outline-variant/50 pb-4">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+              <h2 class="text-2xl md:text-3xl font-headline font-bold text-on-surface">Mata-Mata &amp; Finais</h2>
+            </div>
+            <p class="text-sm font-body text-on-surface-variant mt-0.5">Cruzamento autom&aacute;tico: 1&ordm; do Grupo A x 2&ordm; do Grupo B e 1&ordm; do Grupo B x 2&ordm; do Grupo A.</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-semibold text-on-surface-variant flex items-center gap-1.5">
+              <span class="w-3 h-1 bg-primary rounded-full inline-block"></span> Classifica&ccedil;&atilde;o Ativa
+            </span>
+            <span class="text-xs font-semibold text-on-surface-variant flex items-center gap-1.5">
+              <span class="w-3 h-1 bg-outline-variant rounded-full inline-block"></span> Cruzamento Neutro
+            </span>
+          </div>
+        </div>
+
+        <!-- Tela Grafica do Mata-Mata -->
+        <div class="w-full bg-surface-container-lowest border border-outline-variant/70 rounded-3xl p-6 md:p-8 shadow-sm relative overflow-x-auto custom-scroll">
+          <div class="min-w-[960px] grid grid-cols-3 gap-8 items-center relative">
+            
+            <!-- COLUNA 1: SEMIFINAIS -->
+            <div class="space-y-10">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+                <span class="text-xs font-bold text-primary uppercase tracking-wider">Semifinais</span>
+              </div>
+
+              <!-- Cartao SF 1 -->
+              <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/70 hover:border-primary/60 transition-all shadow-sm space-y-3 relative group" id="card-sf-1">
+                <div class="flex items-center justify-between text-xs font-bold text-on-surface-variant">
+                  <span class="text-primary font-headline">SF 1 &bull; 1&ordm; Grupo A vs 2&ordm; Grupo B</span>
+                  <span class="px-2 py-0.5 rounded-full bg-surface-container border border-outline-variant/60" id="badge-sf-1">Jogo Decisivo</span>
+                </div>
+                
+                <!-- Time 1 (1o A) -->
+                <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/50" id="row-sf1-team1">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-[18px]" id="crest-sf1-team1">&#9898;</span>
+                    <span class="font-bold text-sm text-on-surface" id="name-sf1-team1">1&ordm; Grupo A</span>
+                    <span class="text-xs text-outline font-medium">(1&ordm; A)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf1', 1, -1)">-</button>
+                    <span class="w-8 text-center font-bold text-on-surface text-base" id="score-sf1-team1">0</span>
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf1', 1, 1)">+</button>
+                  </div>
+                </div>
+
+                <!-- Time 2 (2o B) -->
+                <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/50" id="row-sf1-team2">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-[18px]" id="crest-sf1-team2">&#9898;</span>
+                    <span class="font-bold text-sm text-on-surface" id="name-sf1-team2">2&ordm; Grupo B</span>
+                    <span class="text-xs text-outline font-medium">(2&ordm; B)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf1', 2, -1)">-</button>
+                    <span class="w-8 text-center font-bold text-on-surface text-base" id="score-sf1-team2">0</span>
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf1', 2, 1)">+</button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-1">
+                  <button class="text-xs text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-semibold" id="btn-pk-sf1" onclick="toggleKoTieBreak('sf1')">
+                    <span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+                    <span id="pk-label-sf1">Decis&atilde;o por P&ecirc;naltis / Morte S&uacute;bita</span>
+                  </button>
+                  <span class="text-xs text-primary font-bold" id="winner-tag-sf1"></span>
+                </div>
+              </div>
+
+              <!-- Cartao SF 2 -->
+              <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/70 hover:border-primary/60 transition-all shadow-sm space-y-3 relative group" id="card-sf-2">
+                <div class="flex items-center justify-between text-xs font-bold text-on-surface-variant">
+                  <span class="text-primary font-headline">SF 2 &bull; 1&ordm; Grupo B vs 2&ordm; Grupo A</span>
+                  <span class="px-2 py-0.5 rounded-full bg-surface-container border border-outline-variant/60" id="badge-sf-2">Jogo Decisivo</span>
+                </div>
+                
+                <!-- Time 1 (1o B) -->
+                <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/50" id="row-sf2-team1">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-[18px]" id="crest-sf2-team1">&#9898;</span>
+                    <span class="font-bold text-sm text-on-surface" id="name-sf2-team1">1&ordm; Grupo B</span>
+                    <span class="text-xs text-outline font-medium">(1&ordm; B)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf2', 1, -1)">-</button>
+                    <span class="w-8 text-center font-bold text-on-surface text-base" id="score-sf2-team1">0</span>
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf2', 1, 1)">+</button>
+                  </div>
+                </div>
+
+                <!-- Time 2 (2o A) -->
+                <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/50" id="row-sf2-team2">
+                  <div class="flex items-center gap-2.5">
+                    <span class="text-[18px]" id="crest-sf2-team2">&#9898;</span>
+                    <span class="font-bold text-sm text-on-surface" id="name-sf2-team2">2&ordm; Grupo A</span>
+                    <span class="text-xs text-outline font-medium">(2&ordm; A)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf2', 2, -1)">-</button>
+                    <span class="w-8 text-center font-bold text-on-surface text-base" id="score-sf2-team2">0</span>
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('sf2', 2, 1)">+</button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-1">
+                  <button class="text-xs text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-semibold" id="btn-pk-sf2" onclick="toggleKoTieBreak('sf2')">
+                    <span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+                    <span id="pk-label-sf2">Decis&atilde;o por P&ecirc;naltis / Morte S&uacute;bita</span>
+                  </button>
+                  <span class="text-xs text-primary font-bold" id="winner-tag-sf2"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUNA 2: GRANDE FINAL & TROFEU -->
+            <div class="flex flex-col items-center justify-center space-y-6">
+              <div class="text-center space-y-1">
+                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary/40 uppercase tracking-widest inline-flex items-center gap-1.5 shadow-sm">
+                  <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">trophy</span>
+                  GRANDE FINAL SHOWDOWN
+                </span>
+                <p class="text-xs font-semibold text-on-surface-variant">A Grande Decis&atilde;o da Copa Meinha</p>
+              </div>
+
+              <!-- Cartao da Final -->
+              <div class="w-full p-6 rounded-3xl bg-surface-container-high border-2 border-primary/50 shadow-md relative space-y-4" id="card-final">
+                <div class="flex items-center justify-between border-b border-outline-variant/60 pb-2">
+                  <span class="text-xs font-bold text-tertiary uppercase tracking-wider">Disputa da Ta&ccedil;a</span>
+                  <span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest text-xs font-bold text-on-surface-variant border border-outline-variant/60" id="badge-final">Decis&atilde;o do T&iacute;tulo</span>
+                </div>
+                
+                <!-- Finalista 1 (Vencedor SF1) -->
+                <div class="flex items-center justify-between p-3.5 rounded-2xl bg-surface-container-lowest border border-outline-variant/60 shadow-sm" id="row-fn-team1">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[24px]" id="crest-fn-team1">&#128081;</span>
+                    <div>
+                      <span class="font-headline font-bold text-base text-on-surface block truncate max-w-[140px]" id="name-fn-team1">Vencedor SF1</span>
+                      <span class="text-xs font-bold text-primary">Classificado SF 1</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="w-8 h-8 rounded-xl bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-sm" onclick="updateKoScore('fn', 1, -1)">-</button>
+                    <span class="w-10 text-center font-headline font-bold text-tertiary text-[24px]" id="score-fn-team1">0</span>
+                    <button class="w-8 h-8 rounded-xl bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-sm" onclick="updateKoScore('fn', 1, 1)">+</button>
+                  </div>
+                </div>
+
+                <div class="text-center py-0.5">
+                  <span class="text-xs font-bold text-outline tracking-widest uppercase">X</span>
+                </div>
+
+                <!-- Finalista 2 (Vencedor SF2) -->
+                <div class="flex items-center justify-between p-3.5 rounded-2xl bg-surface-container-lowest border border-outline-variant/60 shadow-sm" id="row-fn-team2">
+                  <div class="flex items-center gap-3">
+                    <span class="text-[24px]" id="crest-fn-team2">&#128081;</span>
+                    <div>
+                      <span class="font-headline font-bold text-base text-on-surface block truncate max-w-[140px]" id="name-fn-team2">Vencedor SF2</span>
+                      <span class="text-xs font-bold text-primary">Classificado SF 2</span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="w-8 h-8 rounded-xl bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-sm" onclick="updateKoScore('fn', 2, -1)">-</button>
+                    <span class="w-10 text-center font-headline font-bold text-tertiary text-[24px]" id="score-fn-team2">0</span>
+                    <button class="w-8 h-8 rounded-xl bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-sm" onclick="updateKoScore('fn', 2, 1)">+</button>
+                  </div>
+                </div>
+
+                <div class="pt-2 flex items-center justify-between border-t border-outline-variant/50">
+                  <button class="text-xs text-on-surface-variant hover:text-tertiary transition-colors flex items-center gap-1 font-semibold" id="btn-pk-fn" onclick="toggleKoTieBreak('fn')">
+                    <span class="material-symbols-outlined text-[14px]">sports_soccer</span>
+                    <span id="pk-label-fn">Disputa de P&ecirc;naltis</span>
+                  </button>
+                  <span class="text-xs text-tertiary font-bold" id="winner-tag-fn"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUNA 3: DISPUTA DE 3o LUGAR -->
+            <div class="space-y-8">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-bold text-tertiary uppercase tracking-wider">P&oacute;dio &amp; 3&ordm; Lugar</span>
+              </div>
+
+              <!-- Cartao de 3o Lugar -->
+              <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/70 hover:border-tertiary/60 transition-all shadow-sm space-y-3" id="card-third">
+                <div class="flex items-center justify-between text-xs font-bold text-on-surface-variant">
+                  <span class="text-tertiary font-headline">Disputa de 3&ordm; Lugar &bull; Bronze</span>
+                  <span class="px-2 py-0.5 rounded-full bg-surface-container border border-outline-variant/60" id="badge-third">Medalha de Bronze</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/50">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[16px]" id="crest-third-team1">&#129353;</span>
+                    <span class="font-bold text-sm text-on-surface truncate max-w-[130px]" id="name-third-team1">Perdedor SF1</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('third', 1, -1)">-</button>
+                    <span class="w-8 text-center font-bold text-on-surface text-sm" id="score-third-team1">0</span>
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('third', 1, 1)">+</button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/50">
+                  <div class="flex items-center gap-2">
+                    <span class="text-[16px]" id="crest-third-team2">&#129353;</span>
+                    <span class="font-bold text-sm text-on-surface truncate max-w-[130px]" id="name-third-team2">Perdedor SF2</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('third', 2, -1)">-</button>
+                    <span class="w-8 text-center font-bold text-on-surface text-sm" id="score-third-team2">0</span>
+                    <button class="w-6 h-6 rounded-lg bg-surface-container text-on-surface hover:bg-outline-variant/50 flex items-center justify-center font-bold text-xs" onclick="updateKoScore('third', 2, 1)">+</button>
+                  </div>
+                </div>
+
+                <div class="text-right">
+                  <span class="text-xs text-tertiary font-bold" id="winner-tag-third"></span>
+                </div>
+              </div>
+
+              <!-- Cartao de Regras e Criterios -->
+              <div class="p-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 space-y-2 shadow-sm">
+                <span class="text-xs font-bold text-primary flex items-center gap-1.5 uppercase tracking-wider">
+                  <span class="material-symbols-outlined text-[16px]">info</span> Crit&eacute;rios de Desempate
+                </span>
+                <p class="text-xs font-body text-on-surface-variant leading-relaxed">
+                  Crit&eacute;rios na fase de grupos: Pontos (3 por vit&oacute;ria, 1 por empate) &rarr; Saldo de Gols (SG) &rarr; Gols Pr&oacute; (GP) &rarr; Ordem alfab&eacute;tica. Em caso de empate no mata-mata, ative a decis&atilde;o por p&ecirc;naltis ou morte s&uacute;bita.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECAO: ARTILHARIA & ESTATISTICAS DO TORNEIO -->
+      <section class="space-y-6 pt-2 pb-12" id="stats-section">
+        <div class="flex items-center justify-between border-b border-outline-variant/50 pb-4">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-primary text-[28px]">leaderboard</span>
+              <h2 class="text-2xl md:text-3xl font-headline font-bold text-on-surface">Estat&iacute;sticas &amp; Desempenho do Torneio</h2>
+            </div>
+            <p class="text-sm font-body text-on-surface-variant mt-0.5">Artilharia dos bot&otilde;es, efici&ecirc;ncia ofensiva e dados da mesa oficial.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Artilharia -->
+          <div class="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-outline-variant/50 pb-2.5">
+              <h3 class="font-headline font-bold text-base text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">award_star</span>
+                Artilharia da Copa Meinha
+              </h3>
+              <span class="text-xs font-bold text-outline uppercase tracking-wider">Gols</span>
+            </div>
+            <div class="space-y-3 font-body" id="golden-boot-list">
+              <!-- Preenchido dinamicamente -->
+            </div>
+          </div>
+
+          <!-- Poder Ofensivo dos Times -->
+          <div class="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-outline-variant/50 pb-2.5">
+              <h3 class="font-headline font-bold text-base text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">speed</span>
+                Poder Ofensivo dos Times
+              </h3>
+              <span class="text-xs font-bold text-outline uppercase tracking-wider">Gols / Jogo</span>
+            </div>
+            <div class="space-y-4 font-body" id="offensive-ratings-list">
+              <!-- Preenchido dinamicamente -->
+            </div>
+          </div>
+
+          <!-- Informacoes da Mesa & Regras -->
+          <div class="p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/70 shadow-sm space-y-4 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b border-outline-variant/50 pb-2.5">
+                <h3 class="font-headline font-bold text-base text-on-surface flex items-center gap-2">
+                  <span class="material-symbols-outlined text-tertiary">stadium</span>
+                  Informa&ccedil;&otilde;es da Mesa &amp; Regras
+                </h3>
+                <span class="text-xs font-bold text-outline uppercase tracking-wider">Mesa Oficial</span>
+              </div>
+              <div class="mt-3 space-y-2 text-xs font-body text-on-surface-variant leading-relaxed">
+                <p><strong class="text-on-surface font-semibold">Superf&iacute;cie:</strong> Feltro / Est&aacute;dio de Bot&atilde;o de Alta Precis&atilde;o</p>
+                <p><strong class="text-on-surface font-semibold">Regra do Jogo:</strong> 12 Toques / Dadinho / Bot&atilde;o Tradicional</p>
+                <p><strong class="text-on-surface font-semibold">Bolinha / Dadinho:</strong> Polietileno Oficial CBFM</p>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-surface-container-low border border-outline-variant/60 flex items-center justify-between">
+              <span class="text-xs font-bold text-primary flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">verified</span> S&uacute;mula Digital em Tempo Real
+              </span>
+              <span class="text-xs font-semibold text-outline">Status: Ao Vivo</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- CRONOMETRO FLUTUANTE DE MESA PARA FUTEBOL DE BOTAO -->
+    <div id="floating-timer-widget" class="fixed bottom-5 right-5 z-40 bg-surface-container-lowest border-2 border-primary/50 rounded-2xl p-3.5 shadow-2xl flex items-center gap-4 glow-terra">
+      <div class="flex items-center gap-2.5">
+        <button onclick="whistle.playBlow(0.35)" class="w-9 h-9 rounded-xl bg-primary/10 text-primary hover:bg-primary/20 flex items-center justify-center font-bold" title="Apitar (&Aacute;rbitro)">
+          <span class="material-symbols-outlined text-[20px]">sports</span>
+        </button>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="timer-clock" class="font-mono font-bold text-xl text-on-surface tracking-wider">10:00</span>
+            <span id="timer-period" class="text-[11px] font-bold uppercase px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">1&ordm; Tempo</span>
+          </div>
+          <span class="text-[10px] text-outline block">Cron&ocirc;metro de Mesa</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 border-l border-outline-variant/60 pl-3">
+        <button id="timer-play-btn" onclick="matchTimer.isRunning ? matchTimer.pause() : matchTimer.start()" class="w-8 h-8 rounded-xl bg-primary text-on-primary hover:bg-[#3b6548] flex items-center justify-center font-bold active:scale-95 transition-all" title="Iniciar / Pausar">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+        </button>
+        <button onclick="matchTimer.reset()" class="w-8 h-8 rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center justify-center font-bold active:scale-95 transition-all text-xs" title="Zerar Tempo">
+          <span class="material-symbols-outlined text-[16px]">replay</span>
+        </button>
+        <button onclick="matchTimer.setPeriod('2\u00ba Tempo', 10)" class="px-2 py-1 rounded-lg bg-surface-container text-xs font-bold text-on-surface-variant hover:text-primary" title="Mudar para 2&ordm; Tempo">
+          2&ordm;T
+        </button>
+      </div>
+    </div>
+
+    <!-- Rodape Global -->
+    <footer class="w-full border-t border-outline-variant/50 bg-surface-container-low py-6 px-4 md:px-8 text-center text-on-surface-variant text-xs font-body">
+      <div class="max-w-[1600px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+          <span class="font-semibold text-on-surface">Copa Meinha de Futebol de Bot&atilde;o</span>
+          <span>&bull; Sistema Oficial de Torneio (Terra Engine)</span>
+        </div>
+        <div class="flex items-center gap-6 text-on-surface-variant flex-wrap justify-center">
+          <span>Controle de Partidas: Operacional</span>
+          <span>S&uacute;mula &amp; Cron&ocirc;metro Digital</span>
+          <span>&copy; 2025 Copa Meinha de Futebol de Bot&atilde;o</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL: SUMULA DA PARTIDA & GOLEADORES -->
+  <dialog id="match-modal" class="p-6">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between border-b border-outline-variant/60 pb-3">
+        <div>
+          <h3 class="font-headline font-bold text-lg text-on-surface" id="modal-match-title">S&uacute;mula da Partida</h3>
+          <p class="text-xs text-on-surface-variant">Ajuste o placar e registre os autores dos gols para a artilharia</p>
+        </div>
+        <button onclick="closeMatchModal()" class="text-on-surface-variant hover:text-on-surface p-1 text-lg">&#x2715;</button>
+      </div>
+
+      <!-- Placar da Partida -->
+      <div class="flex items-center justify-around py-3 bg-surface-container-low rounded-2xl border border-outline-variant/60">
+        <div class="text-center w-5/12">
+          <div class="text-2xl" id="modal-home-crest">&#9898;</div>
+          <div class="font-bold text-sm text-on-surface truncate" id="modal-home-name">Mandante</div>
+          <input type="number" id="modal-home-score" min="0" class="mt-2 w-16 text-center text-xl font-bold bg-surface-container-lowest rounded-xl border border-outline-variant/70 py-1"/>
+        </div>
+        <div class="text-center font-bold text-outline text-lg">X</div>
+        <div class="text-center w-5/12">
+          <div class="text-2xl" id="modal-away-crest">&#9898;</div>
+          <div class="font-bold text-sm text-on-surface truncate" id="modal-away-name">Visitante</div>
+          <input type="number" id="modal-away-score" min="0" class="mt-2 w-16 text-center text-xl font-bold bg-surface-container-lowest rounded-xl border border-outline-variant/70 py-1"/>
+        </div>
+      </div>
+
+      <!-- Lista de Gols Registrados -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Autores dos Gols</span>
+          <span class="text-xs text-outline">Computa na Artilharia</span>
+        </div>
+        <ul id="modal-scorers-list" class="space-y-1.5 max-h-36 overflow-y-auto custom-scroll pr-1">
+          <!-- Injetado dinamicamente -->
+        </ul>
+      </div>
+
+      <!-- Formulario de Novo Gol -->
+      <div class="pt-2 border-t border-outline-variant/50 flex flex-wrap gap-2 items-center">
+        <select id="select-scorer-team" class="px-2 py-1.5 text-xs bg-surface-container-low rounded-xl border border-outline-variant/60 font-semibold text-on-surface">
+          <!-- Opcoes preenchidas dinamicamente com Mandante e Visitante -->
+        </select>
+        <input type="text" id="input-scorer-player" placeholder="Jogador/Bot&atilde;o (ex: Zico, Neto)" class="flex-1 min-w-[140px] px-3 py-1.5 text-xs bg-surface-container-low rounded-xl border border-outline-variant/60"/>
+        <input type="number" id="input-scorer-minute" placeholder="Min" min="1" max="120" value="10" class="w-14 px-2 py-1.5 text-xs bg-surface-container-low rounded-xl border border-outline-variant/60 text-center"/>
+        <button onclick="addScorerFromModal()" class="px-3 py-1.5 rounded-xl bg-secondary text-white text-xs font-bold hover:brightness-110 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">add</span> Adicionar Gol
+        </button>
+      </div>
+
+      <div class="pt-4 flex items-center justify-end gap-2 border-t border-outline-variant/60">
+        <button onclick="closeMatchModal()" class="px-4 py-2 rounded-xl bg-surface-container text-xs font-bold text-on-surface-variant hover:bg-surface-container-high">Cancelar</button>
+        <button onclick="saveMatchModal()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-[#3b6548] shadow-sm">Salvar Partida</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL: GERENCIAMENTO DE TIMES -->
+  <dialog id="team-modal" class="p-6">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between border-b border-outline-variant/60 pb-3">
+        <div>
+          <h3 class="font-headline font-bold text-lg text-on-surface">Gerenciar Times</h3>
+          <p class="text-xs text-on-surface-variant">Personalize os nomes dos clubes, escudos e emojis dos bot&otilde;es</p>
+        </div>
+        <button onclick="closeTeamModal()" class="text-on-surface-variant hover:text-on-surface p-1 text-lg">&#x2715;</button>
+      </div>
+
+      <div id="team-manager-list" class="space-y-2 max-h-[380px] overflow-y-auto custom-scroll pr-1">
+        <!-- Times renderizados dinamicamente -->
+      </div>
+
+      <div class="pt-4 flex items-center justify-end gap-2 border-t border-outline-variant/60">
+        <button onclick="closeTeamModal()" class="px-4 py-2 rounded-xl bg-surface-container text-xs font-bold text-on-surface-variant hover:bg-surface-container-high">Cancelar</button>
+        <button onclick="saveTeamManagerModal()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-[#3b6548] shadow-sm">Salvar Altera&ccedil;&otilde;es</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL: CONFIGURACOES & BACKUP -->
+  <dialog id="settings-modal" class="p-6">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between border-b border-outline-variant/60 pb-3">
+        <div>
+          <h3 class="font-headline font-bold text-lg text-on-surface">Configura&ccedil;&otilde;es &amp; Backup</h3>
+          <p class="text-xs text-on-surface-variant">Configure o nome do torneio, formato e exporta&ccedil;&atilde;o dos dados</p>
+        </div>
+        <button onclick="closeSettingsModal()" class="text-on-surface-variant hover:text-on-surface p-1 text-lg">&#x2715;</button>
+      </div>
+
+      <!-- Escolha da Predefinicao -->
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-on-surface-variant uppercase">Predefini&ccedil;&atilde;o de Torneio</label>
+        <select id="settings-preset" onchange="applyPreset(this.value)" class="w-full px-3 py-2 text-sm bg-surface-container-low rounded-xl border border-outline-variant/60 font-medium">
+          <option value="meinha">Copa Meinha de Bot&atilde;o (Cl&aacute;ssicos Nacionais)</option>
+          <option value="meinha_euro">Copa Meinha Internacional (Gigantes Europeus)</option>
+        </select>
+      </div>
+
+      <!-- Nomes Personalizados -->
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-on-surface-variant uppercase">Nome do Torneio</label>
+        <input type="text" id="settings-title" class="w-full px-3 py-2 text-sm bg-surface-container-low rounded-xl border border-outline-variant/60 font-bold"/>
+      </div>
+
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-on-surface-variant uppercase">Subt&iacute;tulo e Regras</label>
+        <input type="text" id="settings-subtitle" class="w-full px-3 py-2 text-sm bg-surface-container-low rounded-xl border border-outline-variant/60"/>
+      </div>
+
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-on-surface-variant uppercase">Local da Final / Mesa</label>
+        <input type="text" id="settings-venue" class="w-full px-3 py-2 text-sm bg-surface-container-low rounded-xl border border-outline-variant/60"/>
+      </div>
+
+      <!-- Exportacao e Importacao -->
+      <div class="pt-3 border-t border-outline-variant/50 flex flex-wrap gap-2 items-center justify-between">
+        <div class="flex gap-2">
+          <button onclick="exportTournamentData()" class="px-3.5 py-2 rounded-xl bg-surface-container border border-outline-variant/80 text-xs font-bold text-on-surface hover:bg-surface-container-high flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">download</span> Exportar JSON
+          </button>
+          
+          <label class="px-3.5 py-2 rounded-xl bg-surface-container border border-outline-variant/80 text-xs font-bold text-on-surface hover:bg-surface-container-high flex items-center gap-1.5 cursor-pointer">
+            <span class="material-symbols-outlined text-[16px]">upload</span> Restaurar JSON
+            <input type="file" accept=".json" onchange="importTournamentData(event)" class="hidden"/>
+          </label>
+        </div>
+
+        <button onclick="saveSettingsModal()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-[#3b6548] shadow-sm">
+          Salvar Configura&ccedil;&otilde;es
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Logica da Aplicacao -->
+  <script src="app.js"></script>
+</body>
+</html>
