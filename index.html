@@ -769,6 +769,15 @@
         </div>
       </div>
 
+      <!-- Status da Partida -->
+      <div class="flex items-center justify-between px-3 py-2 bg-surface-container-low rounded-xl border border-outline-variant/60 text-xs">
+        <label for="modal-match-status" class="font-bold text-on-surface-variant uppercase tracking-wider">Status do Confronto:</label>
+        <select id="modal-match-status" class="px-2.5 py-1 text-xs bg-surface-container-lowest rounded-lg border border-outline-variant/70 font-bold text-on-surface">
+          <option value="FT">Encerrado (Pontua na Tabela)</option>
+          <option value="NS">Não Iniciado (Agendado / 0 Pts)</option>
+        </select>
+      </div>
+
       <!-- Lista de Gols Registrados -->
       <div class="space-y-2">
         <div class="flex items-center justify-between">
@@ -792,9 +801,12 @@
         </button>
       </div>
 
-      <div class="pt-4 flex items-center justify-end gap-2 border-t border-outline-variant/60">
-        <button onclick="closeMatchModal()" class="px-4 py-2 rounded-xl bg-surface-container text-xs font-bold text-on-surface-variant hover:bg-surface-container-high">Cancelar</button>
-        <button onclick="saveMatchModal()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-[#3b6548] shadow-sm">Salvar Partida</button>
+      <div class="pt-4 flex items-center justify-between border-t border-outline-variant/60">
+        <button onclick="resetSingleFixtureModal()" class="px-3 py-2 rounded-xl bg-error/10 text-error hover:bg-error/20 text-xs font-bold transition-colors" title="Redefinir este jogo para 0 a 0 e status não iniciado">Zerar Partida</button>
+        <div class="flex items-center gap-2">
+          <button onclick="closeMatchModal()" class="px-4 py-2 rounded-xl bg-surface-container text-xs font-bold text-on-surface-variant hover:bg-surface-container-high">Cancelar</button>
+          <button onclick="saveMatchModal()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-[#3b6548] shadow-sm">Salvar Partida</button>
+        </div>
       </div>
     </div>
   </dialog>
@@ -810,8 +822,38 @@
         <button onclick="closeTeamModal()" class="text-on-surface-variant hover:text-on-surface p-1 text-lg">&#x2715;</button>
       </div>
 
-      <div id="team-manager-list" class="space-y-2 max-h-[380px] overflow-y-auto custom-scroll pr-1">
+      <div id="team-manager-list" class="space-y-2 max-h-[300px] overflow-y-auto custom-scroll pr-1">
         <!-- Times renderizados dinamicamente -->
+      </div>
+
+      <!-- Paleta de Icones Rapidos -->
+      <div class="p-3 rounded-xl bg-surface-container-low border border-outline-variant/50 space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Paleta de Ícones Rápidos</span>
+          <span class="text-[10px] text-outline">Clique no escudo do time e escolha um ícone</span>
+        </div>
+        <div class="flex flex-wrap gap-1.5 text-lg" id="quick-icons-palette">
+          <button type="button" onclick="setQuickIcon('🚣')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Remo / Flamengo">🚣</button>
+          <button type="button" onclick="setQuickIcon('🔥')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Fogo / Raça">🔥</button>
+          <button type="button" onclick="setQuickIcon('🦅')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Gavião / Corinthians">🦅</button>
+          <button type="button" onclick="setQuickIcon('🐷')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Porco / Palmeiras">🐷</button>
+          <button type="button" onclick="setQuickIcon('🛡️')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Escudo / São Paulo / Ajax">🛡️</button>
+          <button type="button" onclick="setQuickIcon('🐟')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Peixe / Santos">🐟</button>
+          <button type="button" onclick="setQuickIcon('🐳')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Baleia">🐳</button>
+          <button type="button" onclick="setQuickIcon('⚓')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Âncora / Vasco">⚓</button>
+          <button type="button" onclick="setQuickIcon('⛵')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Caravela / Man City">⛵</button>
+          <button type="button" onclick="setQuickIcon('🎩')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Cartola / Fluminense">🎩</button>
+          <button type="button" onclick="setQuickIcon('🤺')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Mosqueteiro / Grêmio">🤺</button>
+          <button type="button" onclick="setQuickIcon('⭐')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Estrela">⭐</button>
+          <button type="button" onclick="setQuickIcon('👑')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Coroa / Real Madrid">👑</button>
+          <button type="button" onclick="setQuickIcon('🦁')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Leão / Bayern">🦁</button>
+          <button type="button" onclick="setQuickIcon('😈')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Diabo / Milan">😈</button>
+          <button type="button" onclick="setQuickIcon('🐝')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Abelha / Dortmund">🐝</button>
+          <button type="button" onclick="setQuickIcon('🗼')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Torre Eiffel / PSG">🗼</button>
+          <button type="button" onclick="setQuickIcon('🐉')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Dragão / Porto">🐉</button>
+          <button type="button" onclick="setQuickIcon('⚽')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Bola de Futebol">⚽</button>
+          <button type="button" onclick="setQuickIcon('🏆')" class="w-8 h-8 rounded-lg bg-surface-container-lowest hover:bg-primary/20 border border-outline-variant/40 flex items-center justify-center transition-all active:scale-95" title="Troféu">🏆</button>
+        </div>
       </div>
 
       <div class="pt-4 flex items-center justify-end gap-2 border-t border-outline-variant/60">

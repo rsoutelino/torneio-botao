@@ -12,14 +12,14 @@ const PRESETS = {
     venue: "Est\u00e1dio Maracan\u00e3 de Mesa",
     categoryBadge: "COPA MEINHA",
     teams: {
-      "FLA": { id: "FLA", name: "Flamengo", group: "A", crest: "\ud83d\udd34\u26ab", seed: 1 },
-      "PAL": { id: "PAL", name: "Palmeiras", group: "A", crest: "\ud83d\udfe2\u26aa", seed: 2 },
-      "SAO": { id: "SAO", name: "S\u00e3o Paulo", group: "A", crest: "\ud83d\udd34\u26aa\u26ab", seed: 3 },
-      "SAN": { id: "SAN", name: "Santos", group: "A", crest: "\u26aa\u26ab", seed: 4 },
-      "COR": { id: "COR", name: "Corinthians", group: "B", crest: "\ud83e\udd85", seed: 1 },
-      "VAS": { id: "VAS", name: "Vasco da Gama", group: "B", crest: "\u2693", seed: 2 },
-      "FLU": { id: "FLU", name: "Fluminense", group: "B", crest: "\ud83c\udded\ud83c\uddfa", seed: 3 },
-      "GRE": { id: "GRE", name: "Gr\u00eamio", group: "B", crest: "\ud83d\udd35\u26aa", seed: 4 }
+      "FLA": { id: "FLA", name: "Flamengo", group: "A", crest: "🚣", seed: 1 },
+      "PAL": { id: "PAL", name: "Palmeiras", group: "A", crest: "🐷", seed: 2 },
+      "SAO": { id: "SAO", name: "S\u00e3o Paulo", group: "A", crest: "🛡️", seed: 3 },
+      "SAN": { id: "SAN", name: "Santos", group: "A", crest: "🐟", seed: 4 },
+      "COR": { id: "COR", name: "Corinthians", group: "B", crest: "🦅", seed: 1 },
+      "VAS": { id: "VAS", name: "Vasco da Gama", group: "B", crest: "⚓", seed: 2 },
+      "FLU": { id: "FLU", name: "Fluminense", group: "B", crest: "🎩", seed: 3 },
+      "GRE": { id: "GRE", name: "Gr\u00eamio", group: "B", crest: "🤺", seed: 4 }
     },
     defaultFixtures: [
       { id: "A1", group: "A", md: 1, home: "FLA", away: "PAL", homeScore: 3, awayScore: 1, status: "FT", scorers: [{ player: "Zico", team: "FLA", min: 4 }, { player: "Gabigol", team: "FLA", min: 9 }, { player: "Zico", team: "FLA", min: 14 }, { player: "Veiga", team: "PAL", min: 12 }] },
@@ -50,14 +50,14 @@ const PRESETS = {
     venue: "Allianz Arena de Mesa",
     categoryBadge: "EURO MEINHA",
     teams: {
-      "RMA": { id: "RMA", name: "Real Madrid", group: "A", crest: "\ud83d\udc51", seed: 1 },
-      "MCI": { id: "MCI", name: "Manchester City", group: "A", crest: "\ud83d\udd35", seed: 2 },
-      "PSG": { id: "PSG", name: "Paris SG", group: "A", crest: "\ud83d\udfe3", seed: 3 },
-      "AJX": { id: "AJX", name: "Ajax", group: "A", crest: "\u26aa", seed: 4 },
-      "BAY": { id: "BAY", name: "Bayern Munique", group: "B", crest: "\ud83d\udd34", seed: 1 },
-      "MIL": { id: "MIL", name: "Milan", group: "B", crest: "\u26ab", seed: 2 },
-      "POR": { id: "POR", name: "Porto", group: "B", crest: "\ud83d\udc09", seed: 3 },
-      "BVB": { id: "BVB", name: "Borussia Dortmund", group: "B", crest: "\ud83d\udfe1", seed: 4 }
+      "RMA": { id: "RMA", name: "Real Madrid", group: "A", crest: "👑", seed: 1 },
+      "MCI": { id: "MCI", name: "Manchester City", group: "A", crest: "⛵", seed: 2 },
+      "PSG": { id: "PSG", name: "Paris SG", group: "A", crest: "🗼", seed: 3 },
+      "AJX": { id: "AJX", name: "Ajax", group: "A", crest: "🛡️", seed: 4 },
+      "BAY": { id: "BAY", name: "Bayern Munique", group: "B", crest: "🦁", seed: 1 },
+      "MIL": { id: "MIL", name: "Milan", group: "B", crest: "😈", seed: 2 },
+      "POR": { id: "POR", name: "Porto", group: "B", crest: "🐉", seed: 3 },
+      "BVB": { id: "BVB", name: "Borussia Dortmund", group: "B", crest: "🐝", seed: 4 }
     },
     defaultFixtures: [
       { id: "A1", group: "A", md: 1, home: "RMA", away: "MCI", homeScore: 3, awayScore: 1, status: "FT", scorers: [{ player: "Vini Jr", team: "RMA", min: 4 }, { player: "Bellingham", team: "RMA", min: 14 }] },
@@ -86,6 +86,31 @@ const PRESETS = {
 // --- ESTADO DA APLICACAO ---
 const STORAGE_KEY = "copa_meinha_state_v3";
 
+// Mapa de migracao para substituir bolinhas coloridas antigas salvas em localStorage por icones autenticos
+const OLD_COLOR_CREST_MAP = {
+  "🔴⚫": "🚣",
+  "🟢⚪": "🐷",
+  "🔴⚪⚫": "🛡️",
+  "⚪⚫": "🐟",
+  "🇭🇺": "🎩",
+  "🔵⚪": "🤺",
+  "🔵": "⛵",
+  "🟣": "🗼",
+  "⚪": "🛡️",
+  "🔴": "🦁",
+  "⚫": "😈",
+  "🟡": "🐝"
+};
+
+function migrateTeamCrests(teamsObj) {
+  if (!teamsObj) return;
+  Object.values(teamsObj).forEach(team => {
+    if (OLD_COLOR_CREST_MAP[team.crest]) {
+      team.crest = OLD_COLOR_CREST_MAP[team.crest];
+    }
+  });
+}
+
 let state = {
   currentPreset: "meinha",
   title: PRESETS.meinha.title,
@@ -108,6 +133,7 @@ function loadState() {
     if (saved) {
       const parsed = JSON.parse(saved);
       state = Object.assign(state, parsed);
+      migrateTeamCrests(state.teams);
     }
   } catch (err) {
     console.warn("N\u00e3o foi poss\u00edvel ler o estado salvo:", err);
@@ -145,7 +171,8 @@ function computeStandings(groupLetter) {
   });
 
   state.fixtures.filter(f => f.group === groupLetter).forEach(f => {
-    if (f.status === "FT" || (f.homeScore > 0 || f.awayScore > 0)) {
+    // Apenas partidas concluidas (FT) pontuam na tabela. Partidas nao iniciadas (NS) nao geram pontos.
+    if (f.status === "FT") {
       const h = table[f.home];
       const a = table[f.away];
       if (!h || !a) return;
@@ -206,15 +233,15 @@ function renderHeaderAndTelemetry() {
   let totalGoals = 0;
 
   state.fixtures.forEach(f => {
-    if (f.status === "FT" || f.homeScore > 0 || f.awayScore > 0) {
+    if (f.status === "FT") {
       finishedCount++;
+      totalGoals += (f.homeScore + f.awayScore);
     }
-    totalGoals += (f.homeScore + f.awayScore);
   });
 
-  // Gols do mata-mata
+  // Gols do mata-mata (somente partidas decididas)
   ['sf1', 'sf2', 'fn', 'third'].forEach(k => {
-    if (state.knockout[k]) {
+    if (state.knockout[k] && state.knockout[k].decided) {
       totalGoals += (state.knockout[k].score1 + state.knockout[k].score2);
       finishedCount++;
     }
@@ -236,8 +263,9 @@ function renderHeaderAndTelemetry() {
   // Lider geral
   const standA = computeStandings('A');
   const standB = computeStandings('B');
-  let topCandidate = "Em andamento";
-  if (standB.length > 0 && standA.length > 0) {
+  let topCandidate = "Aguardando in\u00edcio";
+  const hasGamesPlayed = standA.some(t => t.p > 0) || standB.some(t => t.p > 0);
+  if (hasGamesPlayed && standB.length > 0 && standA.length > 0) {
     topCandidate = (standB[0].pts >= standA[0].pts) ? standB[0].name : standA[0].name;
   }
   const topCandidateEl = document.getElementById("stat-top-candidate");
@@ -299,6 +327,7 @@ function renderFixtures() {
     groupFixtures.forEach(fix => {
       const homeTeam = state.teams[fix.home] || { name: fix.home, crest: "\u26aa" };
       const awayTeam = state.teams[fix.away] || { name: fix.away, crest: "\u26aa" };
+      const isFinished = fix.status === "FT";
 
       const card = document.createElement("div");
       card.className = "p-3 rounded-xl bg-surface-container-low border border-outline-variant/60 flex items-center justify-between hover:border-primary/40 transition-all";
@@ -309,21 +338,26 @@ function renderFixtures() {
           <span class="text-[18px]">${homeTeam.crest}</span>
         </div>
 
-        <!-- Botoes de Placar -->
-        <div class="flex items-center gap-2 mx-2">
-          <div class="flex items-center bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-1 shadow-inner">
-            <button onclick="changeFixtureScore('${fix.id}', 'home', -1)" aria-label="Diminuir placar mandante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">-</button>
-            <span class="w-6 text-center font-bold text-primary text-sm cursor-pointer" onclick="openMatchModal('${fix.id}')" title="Ver S\u00famula">${fix.homeScore}</span>
-            <button onclick="changeFixtureScore('${fix.id}', 'home', 1)" aria-label="Aumentar placar mandante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">+</button>
-          </div>
+        <!-- Botoes de Placar & Status -->
+        <div class="flex flex-col items-center gap-1 mx-1 sm:mx-2">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <div class="flex items-center bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-1 shadow-inner">
+              <button onclick="changeFixtureScore('${fix.id}', 'home', -1)" aria-label="Diminuir placar mandante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">-</button>
+              <span class="w-6 text-center font-bold ${isFinished ? 'text-primary' : 'text-outline'} text-sm cursor-pointer" onclick="openMatchModal('${fix.id}')" title="Ver S\u00famula">${fix.homeScore}</span>
+              <button onclick="changeFixtureScore('${fix.id}', 'home', 1)" aria-label="Aumentar placar mandante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">+</button>
+            </div>
 
-          <span class="text-xs font-bold text-outline cursor-pointer" onclick="openMatchModal('${fix.id}')" title="S\u00famula">X</span>
+            <span class="text-xs font-bold text-outline cursor-pointer" onclick="openMatchModal('${fix.id}')" title="S\u00famula">X</span>
 
-          <div class="flex items-center bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-1 shadow-inner">
-            <button onclick="changeFixtureScore('${fix.id}', 'away', -1)" aria-label="Diminuir placar visitante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">-</button>
-            <span class="w-6 text-center font-bold text-primary text-sm cursor-pointer" onclick="openMatchModal('${fix.id}')" title="Ver S\u00famula">${fix.awayScore}</span>
-            <button onclick="changeFixtureScore('${fix.id}', 'away', 1)" aria-label="Aumentar placar visitante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">+</button>
+            <div class="flex items-center bg-surface-container-lowest rounded-xl border border-outline-variant/60 p-1 shadow-inner">
+              <button onclick="changeFixtureScore('${fix.id}', 'away', -1)" aria-label="Diminuir placar visitante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">-</button>
+              <span class="w-6 text-center font-bold ${isFinished ? 'text-primary' : 'text-outline'} text-sm cursor-pointer" onclick="openMatchModal('${fix.id}')" title="Ver S\u00famula">${fix.awayScore}</span>
+              <button onclick="changeFixtureScore('${fix.id}', 'away', 1)" aria-label="Aumentar placar visitante" class="w-5 h-5 rounded-lg hover:bg-surface-container flex items-center justify-center font-bold text-xs text-on-surface-variant active:scale-90 transition-transform">+</button>
+            </div>
           </div>
+          <button type="button" onclick="toggleFixtureStatus('${fix.id}')" class="text-[9px] font-bold px-2 py-0.5 rounded-full ${isFinished ? 'bg-primary/15 text-primary border border-primary/20' : 'bg-surface-container text-outline border border-outline-variant/50'} hover:opacity-80 transition-opacity" title="Clique para alternar status (Encerrado / Agendado)">
+            ${isFinished ? 'Encerrado (FT)' : 'Agendado'}
+          </button>
         </div>
 
         <!-- Time Visitante -->
@@ -346,8 +380,22 @@ function changeFixtureScore(fixtureId, side, delta) {
   } else {
     fix.awayScore = Math.max(0, fix.awayScore + delta);
   }
-  fix.status = "FT";
 
+  // Se ambos os placares voltarem para 0 e usuario clicou em decrementar sem gols registrados
+  if (fix.homeScore === 0 && fix.awayScore === 0 && (!fix.scorers || fix.scorers.length === 0) && delta < 0) {
+    fix.status = "NS";
+  } else {
+    fix.status = "FT";
+  }
+
+  updateAll();
+  saveState();
+}
+
+function toggleFixtureStatus(fixtureId) {
+  const fix = state.fixtures.find(f => f.id === fixtureId);
+  if (!fix) return;
+  fix.status = (fix.status === "FT") ? "NS" : "FT";
   updateAll();
   saveState();
 }
@@ -381,98 +429,118 @@ function updateBracket() {
   setElementText('score-sf2-team2', state.knockout.sf2.score2);
 
   // Definicao da SF1
-  let sf1Winner, sf1Loser;
-  if (state.knockout.sf1.score1 > state.knockout.sf1.score2) {
-    sf1Winner = winnerA;
-    sf1Loser = runnerB;
-    setElementText('winner-tag-sf1', `Classificado: ${winnerA.name}`);
-  } else if (state.knockout.sf1.score2 > state.knockout.sf1.score1) {
-    sf1Winner = runnerB;
-    sf1Loser = winnerA;
-    setElementText('winner-tag-sf1', `Classificado: ${runnerB.name}`);
-  } else {
-    if (state.knockout.sf1.pkWinner === 2) {
-      sf1Winner = runnerB;
-      sf1Loser = winnerA;
-      setElementText('winner-tag-sf1', `Classificado (P\u00eanaltis): ${runnerB.name}`);
-    } else {
+  let sf1Winner = null, sf1Loser = null;
+  if (state.knockout.sf1.decided) {
+    if (state.knockout.sf1.score1 > state.knockout.sf1.score2) {
       sf1Winner = winnerA;
       sf1Loser = runnerB;
-      setElementText('winner-tag-sf1', `Classificado (P\u00eanaltis): ${winnerA.name}`);
+      setElementText('winner-tag-sf1', `Classificado: ${winnerA.name}`);
+    } else if (state.knockout.sf1.score2 > state.knockout.sf1.score1) {
+      sf1Winner = runnerB;
+      sf1Loser = winnerA;
+      setElementText('winner-tag-sf1', `Classificado: ${runnerB.name}`);
+    } else {
+      if (state.knockout.sf1.pkWinner === 2) {
+        sf1Winner = runnerB;
+        sf1Loser = winnerA;
+        setElementText('winner-tag-sf1', `Classificado (P\u00eanaltis): ${runnerB.name}`);
+      } else {
+        sf1Winner = winnerA;
+        sf1Loser = runnerB;
+        setElementText('winner-tag-sf1', `Classificado (P\u00eanaltis): ${winnerA.name}`);
+      }
     }
+  } else {
+    setElementText('winner-tag-sf1', 'Aguardando partida');
   }
 
   // Definicao da SF2
-  let sf2Winner, sf2Loser;
-  if (state.knockout.sf2.score1 > state.knockout.sf2.score2) {
-    sf2Winner = winnerB;
-    sf2Loser = runnerA;
-    setElementText('winner-tag-sf2', `Classificado: ${winnerB.name}`);
-  } else if (state.knockout.sf2.score2 > state.knockout.sf2.score1) {
-    sf2Winner = runnerA;
-    sf2Loser = winnerB;
-    setElementText('winner-tag-sf2', `Classificado: ${runnerA.name}`);
-  } else {
-    if (state.knockout.sf2.pkWinner === 2) {
-      sf2Winner = runnerA;
-      sf2Loser = winnerB;
-      setElementText('winner-tag-sf2', `Classificado (P\u00eanaltis): ${runnerA.name}`);
-    } else {
+  let sf2Winner = null, sf2Loser = null;
+  if (state.knockout.sf2.decided) {
+    if (state.knockout.sf2.score1 > state.knockout.sf2.score2) {
       sf2Winner = winnerB;
       sf2Loser = runnerA;
-      setElementText('winner-tag-sf2', `Classificado (P\u00eanaltis): ${winnerB.name}`);
+      setElementText('winner-tag-sf2', `Classificado: ${winnerB.name}`);
+    } else if (state.knockout.sf2.score2 > state.knockout.sf2.score1) {
+      sf2Winner = runnerA;
+      sf2Loser = winnerB;
+      setElementText('winner-tag-sf2', `Classificado: ${runnerA.name}`);
+    } else {
+      if (state.knockout.sf2.pkWinner === 2) {
+        sf2Winner = runnerA;
+        sf2Loser = winnerB;
+        setElementText('winner-tag-sf2', `Classificado (P\u00eanaltis): ${runnerA.name}`);
+      } else {
+        sf2Winner = winnerB;
+        sf2Loser = runnerA;
+        setElementText('winner-tag-sf2', `Classificado (P\u00eanaltis): ${winnerB.name}`);
+      }
     }
+  } else {
+    setElementText('winner-tag-sf2', 'Aguardando partida');
   }
 
   // Grande Final
-  setElementText('name-fn-team1', sf1Winner.name);
-  setElementText('crest-fn-team1', sf1Winner.crest);
+  const fnTeam1 = sf1Winner || { name: "Vencedor SF1", crest: "\ud83c\udfc6" };
+  const fnTeam2 = sf2Winner || { name: "Vencedor SF2", crest: "\ud83c\udfc6" };
+  setElementText('name-fn-team1', fnTeam1.name);
+  setElementText('crest-fn-team1', fnTeam1.crest);
   setElementText('score-fn-team1', state.knockout.fn.score1);
 
-  setElementText('name-fn-team2', sf2Winner.name);
-  setElementText('crest-fn-team2', sf2Winner.crest);
+  setElementText('name-fn-team2', fnTeam2.name);
+  setElementText('crest-fn-team2', fnTeam2.crest);
   setElementText('score-fn-team2', state.knockout.fn.score2);
 
   // Decisao de 3o Lugar
-  setElementText('name-third-team1', sf1Loser.name);
-  setElementText('crest-third-team1', sf1Loser.crest);
+  const thirdTeam1 = sf1Loser || { name: "Perdedor SF1", crest: "\ud83e\udd49" };
+  const thirdTeam2 = sf2Loser || { name: "Perdedor SF2", crest: "\ud83e\udd49" };
+  setElementText('name-third-team1', thirdTeam1.name);
+  setElementText('crest-third-team1', thirdTeam1.crest);
   setElementText('score-third-team1', state.knockout.third.score1);
 
-  setElementText('name-third-team2', sf2Loser.name);
-  setElementText('crest-third-team2', sf2Loser.crest);
+  setElementText('name-third-team2', thirdTeam2.name);
+  setElementText('crest-third-team2', thirdTeam2.crest);
   setElementText('score-third-team2', state.knockout.third.score2);
 
-  // Campeao
-  let champion;
-  if (state.knockout.fn.score1 > state.knockout.fn.score2) {
-    champion = sf1Winner;
-    setElementText('winner-tag-fn', `Campe\u00e3o: ${sf1Winner.name}`);
-  } else if (state.knockout.fn.score2 > state.knockout.fn.score1) {
-    champion = sf2Winner;
-    setElementText('winner-tag-fn', `Campe\u00e3o: ${sf2Winner.name}`);
-  } else {
-    if (state.knockout.fn.pkWinner === 2) {
-      champion = sf2Winner;
-      setElementText('winner-tag-fn', `Campe\u00e3o (P\u00eanaltis): ${sf2Winner.name}`);
-    } else {
+  // Campeao e Banner
+  const banner = document.getElementById('champion-banner');
+  if (state.knockout.fn.decided && sf1Winner && sf2Winner) {
+    let champion;
+    if (state.knockout.fn.score1 > state.knockout.fn.score2) {
       champion = sf1Winner;
-      setElementText('winner-tag-fn', `Campe\u00e3o (P\u00eanaltis): ${sf1Winner.name}`);
+      setElementText('winner-tag-fn', `Campe\u00e3o: ${sf1Winner.name}`);
+    } else if (state.knockout.fn.score2 > state.knockout.fn.score1) {
+      champion = sf2Winner;
+      setElementText('winner-tag-fn', `Campe\u00e3o: ${sf2Winner.name}`);
+    } else {
+      if (state.knockout.fn.pkWinner === 2) {
+        champion = sf2Winner;
+        setElementText('winner-tag-fn', `Campe\u00e3o (P\u00eanaltis): ${sf2Winner.name}`);
+      } else {
+        champion = sf1Winner;
+        setElementText('winner-tag-fn', `Campe\u00e3o (P\u00eanaltis): ${sf1Winner.name}`);
+      }
     }
+
+    if (banner && champion) {
+      banner.classList.remove('hidden');
+      setElementText('champion-team-name', champion.name);
+      setElementText('champion-subtext', `T\u00edtulo conquistado com garra no futebol de bot\u00e3o pelo time ${champion.crest} ${champion.name} no ${state.venue}!`);
+    }
+  } else {
+    setElementText('winner-tag-fn', 'Aguardando final');
+    if (banner) banner.classList.add('hidden');
   }
 
   // 3o Colocado
-  if (state.knockout.third.score1 >= state.knockout.third.score2) {
-    setElementText('winner-tag-third', `3\u00ba Lugar: ${sf1Loser.name}`);
+  if (state.knockout.third.decided && sf1Loser && sf2Loser) {
+    if (state.knockout.third.score1 >= state.knockout.third.score2) {
+      setElementText('winner-tag-third', `3\u00ba Lugar: ${sf1Loser.name}`);
+    } else {
+      setElementText('winner-tag-third', `3\u00ba Lugar: ${sf2Loser.name}`);
+    }
   } else {
-    setElementText('winner-tag-third', `3\u00ba Lugar: ${sf2Loser.name}`);
-  }
-
-  // Banner do Campeao
-  const banner = document.getElementById('champion-banner');
-  if (banner && champion) {
-    banner.classList.remove('hidden');
-    setElementText('champion-team-name', champion.name);
-    setElementText('champion-subtext', `T\u00edtulo conquistado com garra no futebol de bot\u00e3o pelo time ${champion.crest} ${champion.name} no ${state.venue}!`);
+    setElementText('winner-tag-third', 'Aguardando disputa');
   }
 }
 
@@ -488,6 +556,7 @@ function updateKoScore(matchKey, teamIndex, delta) {
   } else {
     state.knockout[matchKey].score2 = Math.max(0, state.knockout[matchKey].score2 + delta);
   }
+  state.knockout[matchKey].decided = true;
   updateAll();
   saveState();
 }
@@ -499,6 +568,7 @@ function toggleKoTieBreak(matchKey) {
   } else {
     state.knockout[matchKey].pkWinner = 2;
   }
+  state.knockout[matchKey].decided = true;
   updateAll();
   saveState();
 }
@@ -508,7 +578,7 @@ function updateTelemetryAndStats() {
   const playerGoals = {};
 
   state.fixtures.forEach(f => {
-    if (Array.isArray(f.scorers)) {
+    if (f.status === "FT" && Array.isArray(f.scorers)) {
       f.scorers.forEach(s => {
         const key = `${s.player}:::${s.team}`;
         playerGoals[key] = (playerGoals[key] || 0) + 1;
@@ -529,59 +599,72 @@ function updateTelemetryAndStats() {
   if (goldenBootContainer) {
     goldenBootContainer.innerHTML = "";
 
-    const displayScorers = sortedScorers.length > 0 ? sortedScorers.slice(0, 3) : [
-      { player: "Zico", teamName: "Flamengo", goals: 5 },
-      { player: "Neto Craque", teamName: "Corinthians", goals: 4 },
-      { player: "Pel\u00e9", teamName: "Santos", goals: 3 }
-    ];
-
-    const rankBorderColors = ["border-tertiary", "border-primary", "border-outline-variant"];
-    const rankTextColors = ["text-tertiary", "text-primary", "text-on-surface"];
-
-    displayScorers.forEach((item, idx) => {
-      const div = document.createElement("div");
-      div.className = `flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low border-l-4 ${rankBorderColors[idx] || 'border-outline-variant'}`;
-      div.innerHTML = `
-        <div class="flex items-center gap-2.5">
-          <span class="font-bold ${rankTextColors[idx] || 'text-on-surface'} text-sm">${idx + 1}</span>
-          <div>
-            <span class="text-on-surface font-bold text-sm block">${item.player}</span>
-            <span class="text-xs text-on-surface-variant">${item.teamName}</span>
-          </div>
+    if (sortedScorers.length === 0) {
+      goldenBootContainer.innerHTML = `
+        <div class="p-3 text-center text-xs text-on-surface-variant italic bg-surface-container-low rounded-xl border border-outline-variant/40">
+          Nenhum gol individual registrado ainda. Inicie as partidas para acompanhar a artilharia da Copa Meinha!
         </div>
-        <span class="font-headline font-bold text-lg ${rankTextColors[idx] || 'text-on-surface'}">${item.goals}</span>
       `;
-      goldenBootContainer.appendChild(div);
-    });
+    } else {
+      const displayScorers = sortedScorers.slice(0, 3);
+      const rankBorderColors = ["border-tertiary", "border-primary", "border-outline-variant"];
+      const rankTextColors = ["text-tertiary", "text-primary", "text-on-surface"];
+
+      displayScorers.forEach((item, idx) => {
+        const div = document.createElement("div");
+        div.className = `flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low border-l-4 ${rankBorderColors[idx] || 'border-outline-variant'}`;
+        div.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="font-bold ${rankTextColors[idx] || 'text-on-surface'} text-sm">${idx + 1}</span>
+            <div>
+              <span class="text-on-surface font-bold text-sm block">${item.player}</span>
+              <span class="text-xs text-on-surface-variant">${item.teamName}</span>
+            </div>
+          </div>
+          <span class="font-headline font-bold text-lg ${rankTextColors[idx] || 'text-on-surface'}">${item.goals}</span>
+        `;
+        goldenBootContainer.appendChild(div);
+      });
+    }
   }
 
   // Eficiencia ofensiva calculada dinamicamente
   const standAll = [...computeStandings('A'), ...computeStandings('B')].sort((a, b) => b.gf - a.gf);
   const offensiveContainer = document.getElementById('offensive-ratings-list');
-  if (offensiveContainer && standAll.length >= 3) {
+  if (offensiveContainer) {
     offensiveContainer.innerHTML = "";
-    const top3Teams = standAll.slice(0, 3);
-    const maxGf = Math.max(1, top3Teams[0].gf);
+    const hasGoals = standAll.some(t => t.gf > 0);
 
-    top3Teams.forEach((t, i) => {
-      const pct = Math.round((t.gf / maxGf) * 92);
-      const estXg = (t.p > 0 ? (t.gf / t.p * 1.05).toFixed(2) : "1.00");
-      const colorClass = i === 0 ? "bg-primary" : i === 1 ? "bg-tertiary" : "bg-secondary";
-      const textClass = i === 0 ? "text-primary font-bold" : i === 1 ? "text-tertiary font-bold" : "text-on-surface-variant font-bold";
-
-      const row = document.createElement("div");
-      row.className = "space-y-1.5";
-      row.innerHTML = `
-        <div class="flex justify-between text-xs font-semibold">
-          <span class="text-on-surface flex items-center gap-1.5"><span>${t.crest}</span> ${t.name}</span>
-          <span class="${textClass}">${estXg} Gols/Jogo</span>
-        </div>
-        <div class="w-full h-2.5 rounded-full bg-surface-container overflow-hidden">
-          <div class="h-full ${colorClass} rounded-full" style="width: ${Math.max(15, pct)}%"></div>
+    if (!hasGoals) {
+      offensiveContainer.innerHTML = `
+        <div class="p-3 text-center text-xs text-on-surface-variant italic bg-surface-container-low rounded-xl border border-outline-variant/40">
+          Aguardando gols das partidas para calcular o ranking ofensivo dos clubes.
         </div>
       `;
-      offensiveContainer.appendChild(row);
-    });
+    } else {
+      const top3Teams = standAll.slice(0, 3);
+      const maxGf = Math.max(1, top3Teams[0].gf);
+
+      top3Teams.forEach((t, i) => {
+        const pct = Math.round((t.gf / maxGf) * 92);
+        const estXg = (t.p > 0 ? (t.gf / t.p * 1.05).toFixed(2) : "1.00");
+        const colorClass = i === 0 ? "bg-primary" : i === 1 ? "bg-tertiary" : "bg-secondary";
+        const textClass = i === 0 ? "text-primary font-bold" : i === 1 ? "text-tertiary font-bold" : "text-on-surface-variant font-bold";
+
+        const row = document.createElement("div");
+        row.className = "space-y-1.5";
+        row.innerHTML = `
+          <div class="flex justify-between text-xs font-semibold">
+            <span class="text-on-surface flex items-center gap-1.5"><span>${t.crest}</span> ${t.name}</span>
+            <span class="${textClass}">${estXg} Gols/Jogo</span>
+          </div>
+          <div class="w-full h-2.5 rounded-full bg-surface-container overflow-hidden">
+            <div class="h-full ${colorClass} rounded-full" style="width: ${Math.max(15, pct)}%"></div>
+          </div>
+        `;
+        offensiveContainer.appendChild(row);
+      });
+    }
   }
 }
 
@@ -593,16 +676,10 @@ function simulateAllMatches() {
     fix.status = "FT";
   });
 
-  state.knockout.sf1.score1 = Math.floor(Math.random() * 4) + 1;
-  state.knockout.sf1.score2 = Math.floor(Math.random() * 3);
-  state.knockout.sf2.score1 = Math.floor(Math.random() * 3);
-  state.knockout.sf2.score2 = Math.floor(Math.random() * 4) + 1;
-
-  state.knockout.fn.score1 = Math.floor(Math.random() * 3) + 1;
-  state.knockout.fn.score2 = Math.floor(Math.random() * 3);
-
-  state.knockout.third.score1 = Math.floor(Math.random() * 3);
-  state.knockout.third.score2 = Math.floor(Math.random() * 3);
+  state.knockout.sf1 = { score1: Math.floor(Math.random() * 4) + 1, score2: Math.floor(Math.random() * 3), pkWinner: null, decided: true };
+  state.knockout.sf2 = { score1: Math.floor(Math.random() * 3), score2: Math.floor(Math.random() * 4) + 1, pkWinner: null, decided: true };
+  state.knockout.fn  = { score1: Math.floor(Math.random() * 3) + 1, score2: Math.floor(Math.random() * 3), pkWinner: null, decided: true };
+  state.knockout.third = { score1: Math.floor(Math.random() * 3), score2: Math.floor(Math.random() * 3), pkWinner: null, decided: true };
 
   updateAll();
   saveState();
@@ -628,6 +705,7 @@ function resetTournament() {
     fix.homeScore = 0;
     fix.awayScore = 0;
     fix.scorers = [];
+    fix.status = "NS";
   });
 
   state.knockout.sf1 = { score1: 0, score2: 0, pkWinner: null, decided: false };
@@ -635,9 +713,12 @@ function resetTournament() {
   state.knockout.fn  = { score1: 0, score2: 0, pkWinner: null, decided: false };
   state.knockout.third = { score1: 0, score2: 0, pkWinner: null, decided: false };
 
+  // Migra times para icones caso ainda estejam com bolinhas coloridas
+  migrateTeamCrests(state.teams);
+
   updateAll();
   saveState();
-  showToast("Torneio reiniciado para 0 a 0.");
+  showToast("Torneio reiniciado: placares zerados e todos os times com 0 pts.");
 }
 
 // --- TROCA DE PREDEFINICOES ---
@@ -667,10 +748,10 @@ function openMatchModal(fixtureId) {
   const fix = state.fixtures.find(f => f.id === fixtureId);
   if (!fix) return;
 
-  const home = state.teams[fix.home] || { name: fix.home, crest: "\u26aa" };
-  const away = state.teams[fix.away] || { name: fix.away, crest: "\u26aa" };
+  const home = state.teams[fix.home] || { name: fix.home, crest: "⚪" };
+  const away = state.teams[fix.away] || { name: fix.away, crest: "⚪" };
 
-  document.getElementById("modal-match-title").textContent = `Rodada ${fix.md} \u2022 Grupo ${fix.group}`;
+  document.getElementById("modal-match-title").textContent = `Rodada ${fix.md} • Grupo ${fix.group}`;
   document.getElementById("modal-home-crest").textContent = home.crest;
   document.getElementById("modal-home-name").textContent = home.name;
   document.getElementById("modal-away-crest").textContent = away.crest;
@@ -680,6 +761,9 @@ function openMatchModal(fixtureId) {
   const awayScoreInput = document.getElementById("modal-away-score");
   if (homeScoreInput) homeScoreInput.value = fix.homeScore;
   if (awayScoreInput) awayScoreInput.value = fix.awayScore;
+
+  const statusSelect = document.getElementById("modal-match-status");
+  if (statusSelect) statusSelect.value = fix.status || "NS";
 
   const teamSelect = document.getElementById("select-scorer-team");
   if (teamSelect) {
@@ -715,7 +799,7 @@ function renderModalScorers(fix) {
         <span class="text-outline">(${s.min}')</span>
         <span class="text-on-surface-variant text-[11px] font-semibold">[${s.team}]</span>
       </div>
-      <button onclick="removeScorer(${idx})" class="text-error hover:opacity-80 p-1 text-xs" title="Remover gol">\u2715</button>
+      <button onclick="removeScorer(${idx})" class="text-error hover:opacity-80 p-1 text-xs" title="Remover gol">✕</button>
     `;
     list.appendChild(li);
   });
@@ -735,7 +819,7 @@ function addScorerFromModal() {
   const team = teamSelect ? teamSelect.value : fix.home;
 
   if (!player) {
-    alert("Digite o nome do jogador ou bot\u00e3o que marcou o gol.");
+    alert("Digite o nome do jogador ou botão que marcou o gol.");
     return;
   }
 
@@ -766,14 +850,35 @@ function saveMatchModal() {
 
   const homeScoreInput = document.getElementById("modal-home-score");
   const awayScoreInput = document.getElementById("modal-away-score");
+  const statusSelect = document.getElementById("modal-match-status");
 
   if (homeScoreInput) fix.homeScore = Math.max(0, parseInt(homeScoreInput.value, 10) || 0);
   if (awayScoreInput) fix.awayScore = Math.max(0, parseInt(awayScoreInput.value, 10) || 0);
-  fix.status = "FT";
+  if (statusSelect) {
+    fix.status = statusSelect.value;
+  } else {
+    fix.status = "FT";
+  }
 
   updateAll();
   saveState();
   closeMatchModal();
+}
+
+function resetSingleFixtureModal() {
+  if (!currentModalMatchId) return;
+  const fix = state.fixtures.find(f => f.id === currentModalMatchId);
+  if (!fix) return;
+
+  fix.homeScore = 0;
+  fix.awayScore = 0;
+  fix.scorers = [];
+  fix.status = "NS";
+
+  updateAll();
+  saveState();
+  closeMatchModal();
+  showToast("Partida redefinida para não iniciada (0 pts).");
 }
 
 function closeMatchModal() {
@@ -783,17 +888,38 @@ function closeMatchModal() {
 }
 
 // --- MODAL DE GERENCIAMENTO DE TIMES ---
+let selectedTeamIdForIcon = null;
+
+function setQuickIcon(icon) {
+  if (!selectedTeamIdForIcon) {
+    const firstTeam = Object.keys(state.teams)[0];
+    if (firstTeam) selectedTeamIdForIcon = firstTeam;
+  }
+  if (selectedTeamIdForIcon) {
+    const input = document.getElementById(`edit-crest-${selectedTeamIdForIcon}`);
+    if (input) {
+      input.value = icon;
+      input.focus();
+    }
+  }
+}
+
 function openTeamManagerModal() {
   const container = document.getElementById("team-manager-list");
   if (!container) return;
   container.innerHTML = "";
 
-  Object.values(state.teams).forEach(t => {
+  const teamList = Object.values(state.teams);
+  if (teamList.length > 0) {
+    selectedTeamIdForIcon = teamList[0].id;
+  }
+
+  teamList.forEach(t => {
     const row = document.createElement("div");
     row.className = "flex items-center gap-3 p-2 rounded-xl bg-surface-container-low border border-outline-variant/60";
     row.innerHTML = `
-      <input type="text" value="${t.crest}" id="edit-crest-${t.id}" class="w-12 text-center text-lg bg-surface-container-lowest rounded-lg border border-outline-variant/60 py-1" title="Escudo / Emoji">
-      <input type="text" value="${t.name}" id="edit-name-${t.id}" class="flex-1 px-3 py-1.5 text-sm font-bold bg-surface-container-lowest rounded-lg border border-outline-variant/60">
+      <input type="text" value="${t.crest}" id="edit-crest-${t.id}" onfocus="selectedTeamIdForIcon = '${t.id}'" class="w-12 text-center text-lg bg-surface-container-lowest rounded-lg border border-outline-variant/60 py-1 cursor-pointer focus:border-primary focus:ring-1 focus:ring-primary" title="Clique para selecionar e escolha na paleta de ícones abaixo">
+      <input type="text" value="${t.name}" id="edit-name-${t.id}" onfocus="selectedTeamIdForIcon = '${t.id}'" class="flex-1 px-3 py-1.5 text-sm font-bold bg-surface-container-lowest rounded-lg border border-outline-variant/60">
       <span class="text-xs font-bold text-outline uppercase px-2 py-1 bg-surface-container rounded-lg">Grupo ${t.group}</span>
     `;
     container.appendChild(row);
