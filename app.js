@@ -12,29 +12,29 @@ const PRESETS = {
     venue: "Est\u00e1dio Maracan\u00e3 de Mesa",
     categoryBadge: "COPA MEINHA",
     teams: {
-      "FLA": { id: "FLA", name: "Flamengo", group: "A", crest: "🚣", seed: 1 },
-      "PAL": { id: "PAL", name: "Palmeiras", group: "A", crest: "🐷", seed: 2 },
-      "SAO": { id: "SAO", name: "S\u00e3o Paulo", group: "A", crest: "🛡️", seed: 3 },
+      "MIL": { id: "MIL", name: "Milan", group: "A", crest: "😈", seed: 1 },
+      "POR": { id: "POR", name: "Porto", group: "A", crest: "🐉", seed: 2 },
+      "SAO": { id: "SAO", name: "São Paulo", group: "A", crest: "🛡️", seed: 3 },
       "SAN": { id: "SAN", name: "Santos", group: "A", crest: "🐟", seed: 4 },
-      "COR": { id: "COR", name: "Corinthians", group: "B", crest: "🦅", seed: 1 },
-      "VAS": { id: "VAS", name: "Vasco da Gama", group: "B", crest: "⚓", seed: 2 },
+      "IND": { id: "IND", name: "Independiente", group: "B", crest: "👑", seed: 1 },
+      "PAR": { id: "PAR", name: "Parma", group: "B", crest: "⚔️", seed: 2 },
       "FLU": { id: "FLU", name: "Fluminense", group: "B", crest: "🎩", seed: 3 },
-      "GRE": { id: "GRE", name: "Gr\u00eamio", group: "B", crest: "🤺", seed: 4 }
+      "GRE": { id: "GRE", name: "Grêmio", group: "B", crest: "🤺", seed: 4 }
     },
     defaultFixtures: [
-      { id: "A1", group: "A", md: 1, home: "FLA", away: "PAL", homeScore: 3, awayScore: 1, status: "FT", scorers: [{ player: "Zico", team: "FLA", min: 4 }, { player: "Gabigol", team: "FLA", min: 9 }, { player: "Zico", team: "FLA", min: 14 }, { player: "Veiga", team: "PAL", min: 12 }] },
-      { id: "A2", group: "A", md: 1, home: "SAO", away: "SAN", homeScore: 2, awayScore: 2, status: "FT", scorers: [{ player: "Calleri", team: "SAO", min: 5 }, { player: "Lucas", team: "SAO", min: 16 }, { player: "Neymar", team: "SAN", min: 7 }, { player: "Pel\u00e9", team: "SAN", min: 18 }] },
-      { id: "A3", group: "A", md: 2, home: "FLA", away: "SAO", homeScore: 2, awayScore: 0, status: "FT", scorers: [{ player: "Zico", team: "FLA", min: 8 }, { player: "Pedro", team: "FLA", min: 17 }] },
-      { id: "A4", group: "A", md: 2, home: "PAL", away: "SAN", homeScore: 2, awayScore: 1, status: "FT", scorers: [{ player: "Dudu", team: "PAL", min: 6 }, { player: "Veiga", team: "PAL", min: 13 }, { player: "Pel\u00e9", team: "SAN", min: 15 }] },
-      { id: "A5", group: "A", md: 3, home: "SAN", away: "FLA", homeScore: 1, awayScore: 3, status: "FT", scorers: [{ player: "Pel\u00e9", team: "SAN", min: 10 }, { player: "Zico", team: "FLA", min: 3 }, { player: "Pedro", team: "FLA", min: 11 }, { player: "Gabigol", team: "FLA", min: 19 }] },
-      { id: "A6", group: "A", md: 3, home: "PAL", away: "SAO", homeScore: 2, awayScore: 2, status: "FT", scorers: [{ player: "Veiga", team: "PAL", min: 5 }, { player: "Dudu", team: "PAL", min: 14 }, { player: "Calleri", team: "SAO", min: 8 }, { player: "Lucas", team: "SAO", min: 17 }] },
+      { id: "A1", group: "A", md: 1, home: "MIL", away: "POR", homeScore: 3, awayScore: 1, status: "FT", scorers: [{ player: "Van Basten", team: "MIL", min: 4 }, { player: "Kaká", team: "MIL", min: 9 }, { player: "Van Basten", team: "MIL", min: 14 }, { player: "Deco", team: "POR", min: 12 }] },
+      { id: "A2", group: "A", md: 1, home: "SAO", away: "SAN", homeScore: 2, awayScore: 2, status: "FT", scorers: [{ player: "Calleri", team: "SAO", min: 5 }, { player: "Lucas", team: "SAO", min: 16 }, { player: "Neymar", team: "SAN", min: 7 }, { player: "Pelé", team: "SAN", min: 18 }] },
+      { id: "A3", group: "A", md: 2, home: "MIL", away: "SAO", homeScore: 2, awayScore: 0, status: "FT", scorers: [{ player: "Shevchenko", team: "MIL", min: 8 }, { player: "Maldini", team: "MIL", min: 17 }] },
+      { id: "A4", group: "A", md: 2, home: "POR", away: "SAN", homeScore: 2, awayScore: 1, status: "FT", scorers: [{ player: "Madjer", team: "POR", min: 6 }, { player: "Deco", team: "POR", min: 13 }, { player: "Pelé", team: "SAN", min: 15 }] },
+      { id: "A5", group: "A", md: 3, home: "SAN", away: "MIL", homeScore: 1, awayScore: 3, status: "FT", scorers: [{ player: "Pelé", team: "SAN", min: 10 }, { player: "Kaká", team: "MIL", min: 3 }, { player: "Van Basten", team: "MIL", min: 11 }, { player: "Shevchenko", team: "MIL", min: 19 }] },
+      { id: "A6", group: "A", md: 3, home: "POR", away: "SAO", homeScore: 2, awayScore: 2, status: "FT", scorers: [{ player: "Hulk", team: "POR", min: 5 }, { player: "Deco", team: "POR", min: 14 }, { player: "Calleri", team: "SAO", min: 8 }, { player: "Lucas", team: "SAO", min: 17 }] },
 
-      { id: "B1", group: "B", md: 1, home: "COR", away: "VAS", homeScore: 2, awayScore: 1, status: "FT", scorers: [{ player: "Neto Craque", team: "COR", min: 4 }, { player: "Neto Craque", team: "COR", min: 15 }, { player: "Dinamite", team: "VAS", min: 9 }] },
-      { id: "B2", group: "B", md: 1, home: "FLU", away: "GRE", homeScore: 1, awayScore: 1, status: "FT", scorers: [{ player: "Cano", team: "FLU", min: 11 }, { player: "Renato Ga\u00facho", team: "GRE", min: 18 }] },
-      { id: "B3", group: "B", md: 2, home: "COR", away: "FLU", homeScore: 3, awayScore: 1, status: "FT", scorers: [{ player: "Neto Craque", team: "COR", min: 2 }, { player: "Yuri Alberto", team: "COR", min: 12 }, { player: "Neto Craque", team: "COR", min: 19 }, { player: "Cano", team: "FLU", min: 8 }] },
-      { id: "B4", group: "B", md: 2, home: "VAS", away: "GRE", homeScore: 2, awayScore: 0, status: "FT", scorers: [{ player: "Dinamite", team: "VAS", min: 7 }, { player: "Rom\u00e1rio", team: "VAS", min: 16 }] },
-      { id: "B5", group: "B", md: 3, home: "GRE", away: "COR", homeScore: 1, awayScore: 2, status: "FT", scorers: [{ player: "Renato Ga\u00facho", team: "GRE", min: 10 }, { player: "Neto Craque", team: "COR", min: 6 }, { player: "Yuri Alberto", team: "COR", min: 17 }] },
-      { id: "B6", group: "B", md: 3, home: "VAS", away: "FLU", homeScore: 1, awayScore: 1, status: "FT", scorers: [{ player: "Rom\u00e1rio", team: "VAS", min: 12 }, { player: "Cano", team: "FLU", min: 14 }] }
+      { id: "B1", group: "B", md: 1, home: "IND", away: "PAR", homeScore: 2, awayScore: 1, status: "FT", scorers: [{ player: "Bochini", team: "IND", min: 4 }, { player: "Burruchaga", team: "IND", min: 15 }, { player: "Crespo", team: "PAR", min: 9 }] },
+      { id: "B2", group: "B", md: 1, home: "FLU", away: "GRE", homeScore: 1, awayScore: 1, status: "FT", scorers: [{ player: "Cano", team: "FLU", min: 11 }, { player: "Renato Gaúcho", team: "GRE", min: 18 }] },
+      { id: "B3", group: "B", md: 2, home: "IND", away: "FLU", homeScore: 3, awayScore: 1, status: "FT", scorers: [{ player: "Bochini", team: "IND", min: 2 }, { player: "Bertoni", team: "IND", min: 12 }, { player: "Bochini", team: "IND", min: 19 }, { player: "Cano", team: "FLU", min: 8 }] },
+      { id: "B4", group: "B", md: 2, home: "PAR", away: "GRE", homeScore: 2, awayScore: 0, status: "FT", scorers: [{ player: "Crespo", team: "PAR", min: 7 }, { player: "Chiesa", team: "PAR", min: 16 }] },
+      { id: "B5", group: "B", md: 3, home: "GRE", away: "IND", homeScore: 1, awayScore: 2, status: "FT", scorers: [{ player: "Renato Gaúcho", team: "GRE", min: 10 }, { player: "Burruchaga", team: "IND", min: 6 }, { player: "Bochini", team: "IND", min: 17 }] },
+      { id: "B6", group: "B", md: 3, home: "PAR", away: "FLU", homeScore: 1, awayScore: 1, status: "FT", scorers: [{ player: "Asprilla", team: "PAR", min: 12 }, { player: "Cano", team: "FLU", min: 14 }] }
     ],
     defaultKnockout: {
       sf1: { score1: 2, score2: 1, pkWinner: null, decided: true },
@@ -84,14 +84,16 @@ const PRESETS = {
 };
 
 // --- ESTADO DA APLICACAO ---
-const STORAGE_KEY = "copa_meinha_state_v3";
+const STORAGE_KEY = "copa_meinha_state_v4";
 
 // Mapa de migracao para substituir bolinhas coloridas antigas salvas em localStorage por icones autenticos
 const OLD_COLOR_CREST_MAP = {
-  "🔴⚫": "🚣",
-  "🟢⚪": "🐷",
+  "🔴⚫": "😈",
+  "🟢⚪": "🐉",
   "🔴⚪⚫": "🛡️",
   "⚪⚫": "🐟",
+  "🦅": "👑",
+  "⚓": "⚔️",
   "🇭🇺": "🎩",
   "🔵⚪": "🤺",
   "🔵": "⛵",
@@ -129,14 +131,29 @@ let state = {
 // Carregar estado salvo do LocalStorage
 function loadState() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    let saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) {
+      // Se ainda nao houver v4, verifica se precisa migrar de v3
+      const legacy = localStorage.getItem("copa_meinha_state_v3");
+      if (legacy) {
+        localStorage.removeItem("copa_meinha_state_v3");
+      }
+      saveState();
+      return;
+    }
     if (saved) {
       const parsed = JSON.parse(saved);
       state = Object.assign(state, parsed);
+      // Se os times ainda contiverem os antigos Flamengo ou Corinthians, migra para a nova Copa Meinha
+      if (state.teams && (state.teams.FLA || state.teams.COR || state.teams.PAL || state.teams.VAS)) {
+        state.teams = JSON.parse(JSON.stringify(PRESETS.meinha.teams));
+        state.fixtures = JSON.parse(JSON.stringify(PRESETS.meinha.defaultFixtures));
+        state.knockout = JSON.parse(JSON.stringify(PRESETS.meinha.defaultKnockout));
+      }
       migrateTeamCrests(state.teams);
     }
   } catch (err) {
-    console.warn("N\u00e3o foi poss\u00edvel ler o estado salvo:", err);
+    console.warn("Não foi possível ler o estado salvo:", err);
   }
 }
 
