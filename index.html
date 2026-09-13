@@ -135,7 +135,7 @@
           <span class="hidden sm:inline">Simular Placares</span>
         </button>
 
-        <button class="px-2.5 sm:px-3.5 py-2 rounded-xl bg-surface-container border border-outline-variant/80 text-on-surface hover:bg-surface-container-high active:scale-95 transition-all text-xs font-bold flex items-center gap-1.5" id="btn-reset" onclick="resetTournament()" title="Zerar todos os placares do torneio">
+        <button class="px-2.5 sm:px-3.5 py-2 rounded-xl bg-surface-container border border-outline-variant/80 text-on-surface hover:bg-surface-container-high active:scale-95 transition-all text-xs font-bold flex items-center gap-1.5 cursor-pointer" id="btn-reset" onclick="openResetModal()" title="Zerar todos os placares do torneio">
           <span class="material-symbols-outlined text-[18px]">refresh</span>
           <span class="hidden md:inline">Zerar Torneio</span>
         </button>
@@ -912,14 +912,45 @@
           </label>
         </div>
 
-        <button onclick="saveSettingsModal()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-[#3b6548] shadow-sm">
-          Salvar Configura&ccedil;&otilde;es
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="closeSettingsModal(); openResetModal();" class="px-3.5 py-2 rounded-xl bg-error/10 text-error hover:bg-error/20 text-xs font-bold transition-colors flex items-center gap-1.5" title="Zerar todos os placares">
+            <span class="material-symbols-outlined text-[16px]">refresh</span> Zerar Torneio
+          </button>
+          <button onclick="saveSettingsModal()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold hover:bg-[#3b6548] shadow-sm">
+            Salvar Configura&ccedil;&otilde;es
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL: CONFIRMACAO ZERAR TORNEIO (SEM DEPENDER DE WINDOW.CONFIRM) -->
+  <dialog id="reset-modal" class="p-6 max-w-md">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between border-b border-outline-variant/60 pb-3">
+        <div class="flex items-center gap-2 text-error">
+          <span class="material-symbols-outlined text-2xl">warning</span>
+          <h3 class="font-headline font-bold text-lg text-on-surface">Zerar Torneio?</h3>
+        </div>
+        <button onclick="closeResetModal()" class="text-on-surface-variant hover:text-on-surface p-1 text-lg leading-none cursor-pointer">&#x2715;</button>
+      </div>
+
+      <p class="text-sm text-on-surface-variant leading-relaxed">
+        Tem certeza de que deseja zerar todos os placares do torneio? As partidas da fase de grupos e do mata-mata voltar&atilde;o para <strong class="text-on-surface font-bold">0 a 0</strong>, a lista de artilheiros ser&aacute; limpa e todos os clubes ficar&atilde;o com <strong class="text-on-surface font-bold">0 pontos</strong>.
+      </p>
+
+      <div class="pt-3 flex items-center justify-end gap-2 border-t border-outline-variant/60">
+        <button type="button" onclick="closeResetModal()" class="px-4 py-2 rounded-xl bg-surface-container text-xs font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+          Cancelar
+        </button>
+        <button type="button" onclick="executeResetTournament()" class="px-5 py-2 rounded-xl bg-error text-white text-xs font-bold hover:bg-[#a02826] shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">restart_alt</span> Sim, Zerar Torneio
         </button>
       </div>
     </div>
   </dialog>
 
   <!-- Logica da Aplicacao -->
-  <script src="app.js"></script>
+  <script src="app.js?v=4.0.2"></script>
 </body>
 </html>

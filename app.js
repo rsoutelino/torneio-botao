@@ -279,9 +279,10 @@ function renderTables() {
     const tbody = document.getElementById(`table-group-${group.toLowerCase()}`);
     if (!tbody) return;
 
+    const hasGamesPlayed = standings.some(t => t.p > 0);
     tbody.innerHTML = "";
     standings.forEach((row, idx) => {
-      const isTop2 = idx < 2;
+      const isTop2 = hasGamesPlayed && idx < 2;
       const tr = document.createElement("tr");
       tr.className = `hover:bg-surface-container transition-colors ${isTop2 ? 'bg-primary/5 font-semibold' : ''}`;
 
@@ -404,11 +405,12 @@ function toggleFixtureStatus(fixtureId) {
 function updateBracket() {
   const standA = computeStandings('A');
   const standB = computeStandings('B');
+  const hasGamesPlayed = standA.some(t => t.p > 0) || standB.some(t => t.p > 0);
 
-  const winnerA = standA[0] || { name: "1\u00ba do Grupo A", crest: "\u26aa" };
-  const runnerA = standA[1] || { name: "2\u00ba do Grupo A", crest: "\u26aa" };
-  const winnerB = standB[0] || { name: "1\u00ba do Grupo B", crest: "\u26aa" };
-  const runnerB = standB[1] || { name: "2\u00ba do Grupo B", crest: "\u26aa" };
+  const winnerA = hasGamesPlayed ? (standA[0] || { name: "1º do Grupo A", crest: "🏆" }) : { name: "1º do Grupo A", crest: "🏆" };
+  const runnerA = hasGamesPlayed ? (standA[1] || { name: "2º do Grupo A", crest: "🏆" }) : { name: "2º do Grupo A", crest: "🏆" };
+  const winnerB = hasGamesPlayed ? (standB[0] || { name: "1º do Grupo B", crest: "🏆" }) : { name: "1º do Grupo B", crest: "🏆" };
+  const runnerB = hasGamesPlayed ? (standB[1] || { name: "2º do Grupo B", crest: "🏆" }) : { name: "2º do Grupo B", crest: "🏆" };
 
   // SF1: 1o Grupo A x 2o Grupo B
   setElementText('name-sf1-team1', winnerA.name);
@@ -443,15 +445,15 @@ function updateBracket() {
       if (state.knockout.sf1.pkWinner === 2) {
         sf1Winner = runnerB;
         sf1Loser = winnerA;
-        setElementText('winner-tag-sf1', `Classificado (P\u00eanaltis): ${runnerB.name}`);
+        setElementText('winner-tag-sf1', `Classificado (Pênaltis): ${runnerB.name}`);
       } else {
         sf1Winner = winnerA;
         sf1Loser = runnerB;
-        setElementText('winner-tag-sf1', `Classificado (P\u00eanaltis): ${winnerA.name}`);
+        setElementText('winner-tag-sf1', `Classificado (Pênaltis): ${winnerA.name}`);
       }
     }
   } else {
-    setElementText('winner-tag-sf1', 'Aguardando partida');
+    setElementText('winner-tag-sf1', hasGamesPlayed ? 'Aguardando partida' : 'Aguardando fase de grupos');
   }
 
   // Definicao da SF2
@@ -469,15 +471,15 @@ function updateBracket() {
       if (state.knockout.sf2.pkWinner === 2) {
         sf2Winner = runnerA;
         sf2Loser = winnerB;
-        setElementText('winner-tag-sf2', `Classificado (P\u00eanaltis): ${runnerA.name}`);
+        setElementText('winner-tag-sf2', `Classificado (Pênaltis): ${runnerA.name}`);
       } else {
         sf2Winner = winnerB;
         sf2Loser = runnerA;
-        setElementText('winner-tag-sf2', `Classificado (P\u00eanaltis): ${winnerB.name}`);
+        setElementText('winner-tag-sf2', `Classificado (Pênaltis): ${winnerB.name}`);
       }
     }
   } else {
-    setElementText('winner-tag-sf2', 'Aguardando partida');
+    setElementText('winner-tag-sf2', hasGamesPlayed ? 'Aguardando partida' : 'Aguardando fase de grupos');
   }
 
   // Grande Final
@@ -697,10 +699,24 @@ function randomizeCurrentScores() {
   showToast("Resultados da rodada sorteados!");
 }
 
-function resetTournament() {
-  if (!confirm("Tem certeza de que deseja zerar todos os placares do torneio para 0 a 0?")) {
-    return;
+// --- MODAL E EXECUCAO DE RESET DO TORNEIO ---
+function openResetModal() {
+  const modal = document.getElementById("reset-modal");
+  if (modal && typeof modal.showModal === "function") {
+    modal.showModal();
+  } else {
+    executeResetTournament();
   }
+}
+
+function closeResetModal() {
+  const modal = document.getElementById("reset-modal");
+  if (modal && typeof modal.close === "function") {
+    modal.close();
+  }
+}
+
+function executeResetTournament() {
   state.fixtures.forEach(fix => {
     fix.homeScore = 0;
     fix.awayScore = 0;
@@ -718,7 +734,13 @@ function resetTournament() {
 
   updateAll();
   saveState();
+  closeResetModal();
   showToast("Torneio reiniciado: placares zerados e todos os times com 0 pts.");
+}
+
+// Manter alias retrocompativel
+function resetTournament() {
+  openResetModal();
 }
 
 // --- TROCA DE PREDEFINICOES ---
